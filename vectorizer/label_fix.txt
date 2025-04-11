@@ -1,0 +1,1 @@
+# Add label to ensure ContainerConfig is present LABEL maintainer="diskvoyeur@example.com" LABEL version="1.0" LABEL description="DISKVOYEUR filesystem analysis tool"

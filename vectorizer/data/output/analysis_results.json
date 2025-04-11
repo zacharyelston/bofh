@@ -1,0 +1,221 @@
+{
+  "anomalies": [
+    "/data/input/.hidden_file"
+  ],
+  "clusters": {
+    "0": [
+      "/data/input/mcp_file_collector.js",
+      "/data/input/mcp_batch_processor.sh"
+    ],
+    "2": [
+      "/data/input/README.md"
+    ],
+    "3": [
+      "/data/input/example_setup.sh",
+      "/data/input/tar_parser.js",
+      "/data/input/example_usage.sh",
+      "/data/input/mcp_collector.py"
+    ],
+    "1": [
+      "/data/input/.hidden_file"
+    ],
+    "4": [
+      "/data/input/directory_tree_reader.js",
+      "/data/input/mcp_directory_scanner.sh"
+    ]
+  },
+  "duplicates": [
+    [
+      "/data/input/mcp_file_collector.js",
+      "/data/input/mcp_batch_processor.sh"
+    ],
+    [
+      "/data/input/example_setup.sh",
+      "/data/input/mcp_collector.py"
+    ],
+    [
+      "/data/input/directory_tree_reader.js",
+      "/data/input/mcp_directory_scanner.sh"
+    ]
+  ],
+  "coords_pca": [
+    [
+      1.5609357188637905,
+      0.6172934076649534
+    ],
+    [
+      -2.1240648133249995,
+      -2.379143964605525
+    ],
+    [
+      0.31422222722280657,
+      -0.8832261531305038
+    ],
+    [
+      1.7316583685369609,
+      0.7450025796482368
+    ],
+    [
+      -0.32208735742156197,
+      -1.1575968298263157
+    ],
+    [
+      -5.151342380719286,
+      2.1892507807827832
+    ],
+    [
+      1.637361093242102,
+      1.3630589680327405
+    ],
+    [
+      0.06380122507835623,
+      -0.6913119618878547
+    ],
+    [
+      0.48282296500261196,
+      -1.0062316206575486
+    ],
+    [
+      1.8066929535192195,
+      1.2029047939790323
+    ]
+  ],
+  "coords_tsne": [
+    [
+      -15.62039566040039,
+      -51.606048583984375
+    ],
+    [
+      8.872827529907227,
+      44.388221740722656
+    ],
+    [
+      -1.5250955820083618,
+      2.1654961109161377
+    ],
+    [
+      -3.118339776992798,
+      -62.137474060058594
+    ],
+    [
+      14.337361335754395,
+      21.848003387451172
+    ],
+    [
+      25.330177307128906,
+      57.193904876708984
+    ],
+    [
+      -10.097936630249023,
+      -81.6241226196289
+    ],
+    [
+      -3.1867775917053223,
+      19.120031356811523
+    ],
+    [
+      14.530091285705566,
+      0.14174579083919525
+    ],
+    [
+      -22.62578010559082,
+      -69.60467529296875
+    ]
+  ],
+  "paths": [
+    "/data/input/mcp_file_collector.js",
+    "/data/input/README.md",
+    "/data/input/example_setup.sh",
+    "/data/input/mcp_batch_processor.sh",
+    "/data/input/tar_parser.js",
+    "/data/input/.hidden_file",
+    "/data/input/directory_tree_reader.js",
+    "/data/input/example_usage.sh",
+    "/data/input/mcp_collector.py",
+    "/data/input/mcp_directory_scanner.sh"
+  ],
+  "metadata": {
+    "/data/input/mcp_file_collector.js": {
+      "size": 12871.0,
+      "modified": 1744375093.1666615,
+      "accessed": 1744394981.341108,
+      "permissions": "644"
+    },
+    "/data/input/README.md": {
+      "size": 4093.0,
+      "modified": 1744380108.9990742,
+      "accessed": 1744394982.4093087,
+      "permissions": "644"
+    },
+    "/data/input/example_setup.sh": {
+      "size": 10936.0,
+      "modified": 1744375401.3274615,
+      "accessed": 1744394981.5548613,
+      "permissions": "644"
+    },
+    "/data/input/mcp_batch_processor.sh": {
+      "size": 15067.0,
+      "modified": 1744375165.268158,
+      "accessed": 1744394982.3765779,
+      "permissions": "644"
+    },
+    "/data/input/tar_parser.js": {
+      "size": 3923.0,
+      "modified": 1744375041.1674838,
+      "accessed": 1744394982.373367,
+      "permissions": "644"
+    },
+    "/data/input/.hidden_file": {
+      "size": 115.0,
+      "modified": 1744382845.225579,
+      "accessed": 1744383213.536918,
+      "permissions": "644"
+    },
+    "/data/input/directory_tree_reader.js": {
+      "size": 3378.0,
+      "modified": 1744375022.4132648,
+      "accessed": 1744394982.4205332,
+      "permissions": "644"
+    },
+    "/data/input/example_usage.sh": {
+      "size": 4320.0,
+      "modified": 1744375424.4743223,
+      "accessed": 1744394982.3856902,
+      "permissions": "644"
+    },
+    "/data/input/mcp_collector.py": {
+      "size": 19597.0,
+      "modified": 1744375314.9787545,
+      "accessed": 1744394982.4060225,
+      "permissions": "644"
+    },
+    "/data/input/mcp_directory_scanner.sh": {
+      "size": 7775.0,
+      "modified": 1744375353.306115,
+      "accessed": 1744394982.4221146,
+      "permissions": "644"
+    }
+  },
+  "feature_names": [
+    "size_log",
+    "age_days",
+    "depth",
+    "filename_length",
+    "is_hidden",
+    "has_extension",
+    "extension_length",
+    "path_length",
+    "dirname_length",
+    "dot_count",
+    "underscore_count",
+    "hyphen_count",
+    "number_count"
+  ],
+  "stats": {
+    "total_files": 10.0,
+    "total_size": 82075.0,
+    "anomaly_count": 1.0,
+    "duplicate_groups": 3.0,
+    "cluster_count": 5.0
+  }
+}

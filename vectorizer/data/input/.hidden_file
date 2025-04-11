@@ -1,0 +1,2 @@
+This is a hidden file with a leading dot.
+It should be detected as potentially anomalous due to its hidden status.

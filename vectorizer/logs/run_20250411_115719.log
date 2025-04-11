@@ -1,0 +1,912 @@
+[0;34m[INFO][0m DISKVOYEUR Analysis Run - Fri Apr 11 11:57:19 EDT 2025
+[0;34m[INFO][0m Target directory: /Users/zacelston/AlZacAI/bofh/find2tar
+[0;34m[INFO][0m Script directory: /Users/zacelston/AlZacAI/bofh/vectorizer
+[0;34m[INFO][0m ----------------------------------------
+[0;34m[INFO][0m Preparing to analyze directory: /Users/zacelston/AlZacAI/bofh/find2tar
+[0;34m[INFO][0m Clearing input directory...
+[0;34m[INFO][0m Copying files to input directory...
+[0;34m[INFO][0m Checking Docker status...
+[0;34m[INFO][0m Rebuilding Docker images...
+Building diskvoyeur
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.39kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.9-slim
+#2 DONE 0.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/8] FROM docker.io/library/python:3.9-slim@sha256:9aa5793609640ecea2f06451a0d6f379330880b413f954933289cf3b27a78567
+#4 DONE 0.0s
+
+#5 [2/8] WORKDIR /app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 79.76kB 0.0s done
+#6 DONE 0.0s
+
+#7 [3/8] RUN apt-get update && apt-get install -y     tar     gzip     git     && rm -rf /var/lib/apt/lists/*
+#7 0.350 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#7 0.422 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#7 0.453 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+#7 0.483 Get:4 http://deb.debian.org/debian bookworm/main arm64 Packages [8692 kB]
+#7 0.824 Get:5 http://deb.debian.org/debian bookworm-updates/main arm64 Packages [512 B]
+#7 0.825 Get:6 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages [248 kB]
+#7 1.536 Fetched 9195 kB in 1s (6971 kB/s)
+#7 1.536 Reading package lists...
+#7 1.861 Reading package lists...
+#7 2.151 Building dependency tree...
+#7 2.225 Reading state information...
+#7 2.317 tar is already the newest version (1.34+dfsg-1.2+deb12u1).
+#7 2.317 tar set to manually installed.
+#7 2.317 gzip is already the newest version (1.12-1).
+#7 2.317 gzip set to manually installed.
+#7 2.317 The following additional packages will be installed:
+#7 2.317   git-man less libbrotli1 libbsd0 libcbor0.8 libcurl3-gnutls libedit2
+#7 2.317   liberror-perl libexpat1 libfido2-1 libgdbm-compat4 libldap-2.5-0
+#7 2.317   libldap-common libnghttp2-14 libperl5.36 libpsl5 librtmp1 libsasl2-2
+#7 2.317   libsasl2-modules libsasl2-modules-db libssh2-1 libx11-6 libx11-data libxau6
+#7 2.317   libxcb1 libxdmcp6 libxext6 libxmuu1 openssh-client patch perl
+#7 2.317   perl-modules-5.36 publicsuffix xauth
+#7 2.318 Suggested packages:
+#7 2.318   gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui
+#7 2.318   gitk gitweb git-cvs git-mediawiki git-svn sensible-utils
+#7 2.318   libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+#7 2.318   libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql keychain
+#7 2.318   libpam-ssh monkeysphere ssh-askpass ed diffutils-doc perl-doc
+#7 2.318   libterm-readline-gnu-perl | libterm-readline-perl-perl make
+#7 2.318   libtap-harness-archive-perl
+#7 2.468 The following NEW packages will be installed:
+#7 2.468   git git-man less libbrotli1 libbsd0 libcbor0.8 libcurl3-gnutls libedit2
+#7 2.468   liberror-perl libexpat1 libfido2-1 libgdbm-compat4 libldap-2.5-0
+#7 2.468   libldap-common libnghttp2-14 libperl5.36 libpsl5 librtmp1 libsasl2-2
+#7 2.468   libsasl2-modules libsasl2-modules-db libssh2-1 libx11-6 libx11-data libxau6
+#7 2.468   libxcb1 libxdmcp6 libxext6 libxmuu1 openssh-client patch perl
+#7 2.468   perl-modules-5.36 publicsuffix xauth
+#7 2.604 0 upgraded, 35 newly installed, 0 to remove and 0 not upgraded.
+#7 2.604 Need to get 20.7 MB of archives.
+#7 2.604 After this operation, 116 MB of additional disk space will be used.
+#7 2.604 Get:1 http://deb.debian.org/debian bookworm/main arm64 perl-modules-5.36 all 5.36.0-7+deb12u1 [2815 kB]
+#7 2.841 Get:2 http://deb.debian.org/debian bookworm/main arm64 libgdbm-compat4 arm64 1.23-3 [48.0 kB]
+#7 2.844 Get:3 http://deb.debian.org/debian bookworm/main arm64 libperl5.36 arm64 5.36.0-7+deb12u1 [4014 kB]
+#7 2.963 Get:4 http://deb.debian.org/debian bookworm/main arm64 perl arm64 5.36.0-7+deb12u1 [239 kB]
+#7 2.965 Get:5 http://deb.debian.org/debian bookworm/main arm64 less arm64 590-2.1~deb12u2 [128 kB]
+#7 2.976 Get:6 http://deb.debian.org/debian bookworm/main arm64 libbsd0 arm64 0.11.7-2 [115 kB]
+#7 2.979 Get:7 http://deb.debian.org/debian bookworm/main arm64 libedit2 arm64 3.1-20221030-2 [88.1 kB]
+#7 2.989 Get:8 http://deb.debian.org/debian bookworm/main arm64 libcbor0.8 arm64 0.8.0-2+b1 [26.0 kB]
+#7 2.989 Get:9 http://deb.debian.org/debian bookworm/main arm64 libfido2-1 arm64 1.12.0-2+b1 [72.6 kB]
+#7 2.991 Get:10 http://deb.debian.org/debian bookworm/main arm64 openssh-client arm64 1:9.2p1-2+deb12u5 [935 kB]
+#7 3.016 Get:11 http://deb.debian.org/debian bookworm/main arm64 libbrotli1 arm64 1.0.9-2+b6 [269 kB]
+#7 3.032 Get:12 http://deb.debian.org/debian bookworm/main arm64 libsasl2-modules-db arm64 2.1.28+dfsg-10 [20.8 kB]
+#7 3.032 Get:13 http://deb.debian.org/debian bookworm/main arm64 libsasl2-2 arm64 2.1.28+dfsg-10 [58.0 kB]
+#7 3.033 Get:14 http://deb.debian.org/debian bookworm/main arm64 libldap-2.5-0 arm64 2.5.13+dfsg-5 [171 kB]
+#7 3.033 Get:15 http://deb.debian.org/debian bookworm/main arm64 libnghttp2-14 arm64 1.52.0-1+deb12u2 [68.6 kB]
+#7 3.034 Get:16 http://deb.debian.org/debian bookworm/main arm64 libpsl5 arm64 0.21.2-1 [58.6 kB]
+#7 3.062 Get:17 http://deb.debian.org/debian bookworm/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2+b2 [59.4 kB]
+#7 3.064 Get:18 http://deb.debian.org/debian bookworm/main arm64 libssh2-1 arm64 1.10.0-3+b1 [172 kB]
+#7 3.069 Get:19 http://deb.debian.org/debian bookworm/main arm64 libcurl3-gnutls arm64 7.88.1-10+deb12u12 [362 kB]
+#7 3.074 Get:20 http://deb.debian.org/debian bookworm/main arm64 libexpat1 arm64 2.5.0-1+deb12u1 [84.6 kB]
+#7 3.085 Get:21 http://deb.debian.org/debian bookworm/main arm64 liberror-perl all 0.17029-2 [29.0 kB]
+#7 3.086 Get:22 http://deb.debian.org/debian bookworm/main arm64 git-man all 1:2.39.5-0+deb12u2 [2053 kB]
+#7 3.151 Get:23 http://deb.debian.org/debian bookworm/main arm64 git arm64 1:2.39.5-0+deb12u2 [7148 kB]
+#7 3.339 Get:24 http://deb.debian.org/debian bookworm/main arm64 libldap-common all 2.5.13+dfsg-5 [29.3 kB]
+#7 3.340 Get:25 http://deb.debian.org/debian bookworm/main arm64 libsasl2-modules arm64 2.1.28+dfsg-10 [63.1 kB]
+#7 3.341 Get:26 http://deb.debian.org/debian bookworm/main arm64 libxau6 arm64 1:1.0.9-1 [19.7 kB]
+#7 3.341 Get:27 http://deb.debian.org/debian bookworm/main arm64 libxdmcp6 arm64 1:1.1.2-3 [25.4 kB]
+#7 3.350 Get:28 http://deb.debian.org/debian bookworm/main arm64 libxcb1 arm64 1.15-1 [143 kB]
+#7 3.351 Get:29 http://deb.debian.org/debian bookworm/main arm64 libx11-data all 2:1.8.4-2+deb12u2 [292 kB]
+#7 3.360 Get:30 http://deb.debian.org/debian bookworm/main arm64 libx11-6 arm64 2:1.8.4-2+deb12u2 [735 kB]
+#7 3.376 Get:31 http://deb.debian.org/debian bookworm/main arm64 libxext6 arm64 2:1.3.4-1+b1 [51.7 kB]
+#7 3.376 Get:32 http://deb.debian.org/debian bookworm/main arm64 libxmuu1 arm64 2:1.1.3-3 [24.0 kB]
+#7 3.377 Get:33 http://deb.debian.org/debian bookworm/main arm64 patch arm64 2.7.6-7 [121 kB]
+#7 3.392 Get:34 http://deb.debian.org/debian bookworm/main arm64 publicsuffix all 20230209.2326-1 [126 kB]
+#7 3.393 Get:35 http://deb.debian.org/debian bookworm/main arm64 xauth arm64 1:1.1.2-1 [35.5 kB]
+#7 3.521 debconf: delaying package configuration, since apt-utils is not installed
+#7 3.536 Fetched 20.7 MB in 1s (22.4 MB/s)
+#7 3.546 Selecting previously unselected package perl-modules-5.36.
+#7 3.546 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6682 files and directories currently installed.)
+#7 3.551 Preparing to unpack .../00-perl-modules-5.36_5.36.0-7+deb12u1_all.deb ...
+#7 3.553 Unpacking perl-modules-5.36 (5.36.0-7+deb12u1) ...
+#7 3.797 Selecting previously unselected package libgdbm-compat4:arm64.
+#7 3.798 Preparing to unpack .../01-libgdbm-compat4_1.23-3_arm64.deb ...
+#7 3.800 Unpacking libgdbm-compat4:arm64 (1.23-3) ...
+#7 3.828 Selecting previously unselected package libperl5.36:arm64.
+#7 3.829 Preparing to unpack .../02-libperl5.36_5.36.0-7+deb12u1_arm64.deb ...
+#7 3.847 Unpacking libperl5.36:arm64 (5.36.0-7+deb12u1) ...
+#7 4.149 Selecting previously unselected package perl.
+#7 4.150 Preparing to unpack .../03-perl_5.36.0-7+deb12u1_arm64.deb ...
+#7 4.154 Unpacking perl (5.36.0-7+deb12u1) ...
+#7 4.181 Selecting previously unselected package less.
+#7 4.182 Preparing to unpack .../04-less_590-2.1~deb12u2_arm64.deb ...
+#7 4.184 Unpacking less (590-2.1~deb12u2) ...
+#7 4.204 Selecting previously unselected package libbsd0:arm64.
+#7 4.205 Preparing to unpack .../05-libbsd0_0.11.7-2_arm64.deb ...
+#7 4.206 Unpacking libbsd0:arm64 (0.11.7-2) ...
+#7 4.225 Selecting previously unselected package libedit2:arm64.
+#7 4.226 Preparing to unpack .../06-libedit2_3.1-20221030-2_arm64.deb ...
+#7 4.229 Unpacking libedit2:arm64 (3.1-20221030-2) ...
+#7 4.245 Selecting previously unselected package libcbor0.8:arm64.
+#7 4.245 Preparing to unpack .../07-libcbor0.8_0.8.0-2+b1_arm64.deb ...
+#7 4.247 Unpacking libcbor0.8:arm64 (0.8.0-2+b1) ...
+#7 4.260 Selecting previously unselected package libfido2-1:arm64.
+#7 4.261 Preparing to unpack .../08-libfido2-1_1.12.0-2+b1_arm64.deb ...
+#7 4.263 Unpacking libfido2-1:arm64 (1.12.0-2+b1) ...
+#7 4.283 Selecting previously unselected package openssh-client.
+#7 4.284 Preparing to unpack .../09-openssh-client_1%3a9.2p1-2+deb12u5_arm64.deb ...
+#7 4.287 Unpacking openssh-client (1:9.2p1-2+deb12u5) ...
+#7 4.356 Selecting previously unselected package libbrotli1:arm64.
+#7 4.357 Preparing to unpack .../10-libbrotli1_1.0.9-2+b6_arm64.deb ...
+#7 4.358 Unpacking libbrotli1:arm64 (1.0.9-2+b6) ...
+#7 4.385 Selecting previously unselected package libsasl2-modules-db:arm64.
+#7 4.386 Preparing to unpack .../11-libsasl2-modules-db_2.1.28+dfsg-10_arm64.deb ...
+#7 4.387 Unpacking libsasl2-modules-db:arm64 (2.1.28+dfsg-10) ...
+#7 4.401 Selecting previously unselected package libsasl2-2:arm64.
+#7 4.402 Preparing to unpack .../12-libsasl2-2_2.1.28+dfsg-10_arm64.deb ...
+#7 4.403 Unpacking libsasl2-2:arm64 (2.1.28+dfsg-10) ...
+#7 4.418 Selecting previously unselected package libldap-2.5-0:arm64.
+#7 4.418 Preparing to unpack .../13-libldap-2.5-0_2.5.13+dfsg-5_arm64.deb ...
+#7 4.419 Unpacking libldap-2.5-0:arm64 (2.5.13+dfsg-5) ...
+#7 4.448 Selecting previously unselected package libnghttp2-14:arm64.
+#7 4.449 Preparing to unpack .../14-libnghttp2-14_1.52.0-1+deb12u2_arm64.deb ...
+#7 4.450 Unpacking libnghttp2-14:arm64 (1.52.0-1+deb12u2) ...
+#7 4.466 Selecting previously unselected package libpsl5:arm64.
+#7 4.467 Preparing to unpack .../15-libpsl5_0.21.2-1_arm64.deb ...
+#7 4.469 Unpacking libpsl5:arm64 (0.21.2-1) ...
+#7 4.487 Selecting previously unselected package librtmp1:arm64.
+#7 4.488 Preparing to unpack .../16-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_arm64.deb ...
+#7 4.489 Unpacking librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+#7 4.503 Selecting previously unselected package libssh2-1:arm64.
+#7 4.504 Preparing to unpack .../17-libssh2-1_1.10.0-3+b1_arm64.deb ...
+#7 4.505 Unpacking libssh2-1:arm64 (1.10.0-3+b1) ...
+#7 4.526 Selecting previously unselected package libcurl3-gnutls:arm64.
+#7 4.527 Preparing to unpack .../18-libcurl3-gnutls_7.88.1-10+deb12u12_arm64.deb ...
+#7 4.528 Unpacking libcurl3-gnutls:arm64 (7.88.1-10+deb12u12) ...
+#7 4.555 Selecting previously unselected package libexpat1:arm64.
+#7 4.556 Preparing to unpack .../19-libexpat1_2.5.0-1+deb12u1_arm64.deb ...
+#7 4.557 Unpacking libexpat1:arm64 (2.5.0-1+deb12u1) ...
+#7 4.570 Selecting previously unselected package liberror-perl.
+#7 4.571 Preparing to unpack .../20-liberror-perl_0.17029-2_all.deb ...
+#7 4.573 Unpacking liberror-perl (0.17029-2) ...
+#7 4.590 Selecting previously unselected package git-man.
+#7 4.591 Preparing to unpack .../21-git-man_1%3a2.39.5-0+deb12u2_all.deb ...
+#7 4.592 Unpacking git-man (1:2.39.5-0+deb12u2) ...
+#7 4.665 Selecting previously unselected package git.
+#7 4.666 Preparing to unpack .../22-git_1%3a2.39.5-0+deb12u2_arm64.deb ...
+#7 4.670 Unpacking git (1:2.39.5-0+deb12u2) ...
+#7 4.967 Selecting previously unselected package libldap-common.
+#7 4.968 Preparing to unpack .../23-libldap-common_2.5.13+dfsg-5_all.deb ...
+#7 4.969 Unpacking libldap-common (2.5.13+dfsg-5) ...
+#7 4.984 Selecting previously unselected package libsasl2-modules:arm64.
+#7 4.984 Preparing to unpack .../24-libsasl2-modules_2.1.28+dfsg-10_arm64.deb ...
+#7 4.987 Unpacking libsasl2-modules:arm64 (2.1.28+dfsg-10) ...
+#7 5.005 Selecting previously unselected package libxau6:arm64.
+#7 5.006 Preparing to unpack .../25-libxau6_1%3a1.0.9-1_arm64.deb ...
+#7 5.007 Unpacking libxau6:arm64 (1:1.0.9-1) ...
+#7 5.019 Selecting previously unselected package libxdmcp6:arm64.
+#7 5.020 Preparing to unpack .../26-libxdmcp6_1%3a1.1.2-3_arm64.deb ...
+#7 5.021 Unpacking libxdmcp6:arm64 (1:1.1.2-3) ...
+#7 5.036 Selecting previously unselected package libxcb1:arm64.
+#7 5.037 Preparing to unpack .../27-libxcb1_1.15-1_arm64.deb ...
+#7 5.039 Unpacking libxcb1:arm64 (1.15-1) ...
+#7 5.054 Selecting previously unselected package libx11-data.
+#7 5.055 Preparing to unpack .../28-libx11-data_2%3a1.8.4-2+deb12u2_all.deb ...
+#7 5.057 Unpacking libx11-data (2:1.8.4-2+deb12u2) ...
+#7 5.094 Selecting previously unselected package libx11-6:arm64.
+#7 5.096 Preparing to unpack .../29-libx11-6_2%3a1.8.4-2+deb12u2_arm64.deb ...
+#7 5.097 Unpacking libx11-6:arm64 (2:1.8.4-2+deb12u2) ...
+#7 5.141 Selecting previously unselected package libxext6:arm64.
+#7 5.142 Preparing to unpack .../30-libxext6_2%3a1.3.4-1+b1_arm64.deb ...
+#7 5.143 Unpacking libxext6:arm64 (2:1.3.4-1+b1) ...
+#7 5.156 Selecting previously unselected package libxmuu1:arm64.
+#7 5.157 Preparing to unpack .../31-libxmuu1_2%3a1.1.3-3_arm64.deb ...
+#7 5.158 Unpacking libxmuu1:arm64 (2:1.1.3-3) ...
+#7 5.169 Selecting previously unselected package patch.
+#7 5.170 Preparing to unpack .../32-patch_2.7.6-7_arm64.deb ...
+#7 5.171 Unpacking patch (2.7.6-7) ...
+#7 5.186 Selecting previously unselected package publicsuffix.
+#7 5.187 Preparing to unpack .../33-publicsuffix_20230209.2326-1_all.deb ...
+#7 5.188 Unpacking publicsuffix (20230209.2326-1) ...
+#7 5.206 Selecting previously unselected package xauth.
+#7 5.207 Preparing to unpack .../34-xauth_1%3a1.1.2-1_arm64.deb ...
+#7 5.208 Unpacking xauth (1:1.1.2-1) ...
+#7 5.224 Setting up libexpat1:arm64 (2.5.0-1+deb12u1) ...
+#7 5.227 Setting up libxau6:arm64 (1:1.0.9-1) ...
+#7 5.232 Setting up libpsl5:arm64 (0.21.2-1) ...
+#7 5.235 Setting up libcbor0.8:arm64 (0.8.0-2+b1) ...
+#7 5.239 Setting up libbrotli1:arm64 (1.0.9-2+b6) ...
+#7 5.243 Setting up libsasl2-modules:arm64 (2.1.28+dfsg-10) ...
+#7 5.248 Setting up libnghttp2-14:arm64 (1.52.0-1+deb12u2) ...
+#7 5.253 Setting up less (590-2.1~deb12u2) ...
+#7 5.262 Setting up libldap-common (2.5.13+dfsg-5) ...
+#7 5.267 Setting up libsasl2-modules-db:arm64 (2.1.28+dfsg-10) ...
+#7 5.271 Setting up perl-modules-5.36 (5.36.0-7+deb12u1) ...
+#7 5.274 Setting up libx11-data (2:1.8.4-2+deb12u2) ...
+#7 5.277 Setting up librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+#7 5.281 Setting up patch (2.7.6-7) ...
+#7 5.284 Setting up libgdbm-compat4:arm64 (1.23-3) ...
+#7 5.287 Setting up libsasl2-2:arm64 (2.1.28+dfsg-10) ...
+#7 5.291 Setting up git-man (1:2.39.5-0+deb12u2) ...
+#7 5.295 Setting up libssh2-1:arm64 (1.10.0-3+b1) ...
+#7 5.299 Setting up libfido2-1:arm64 (1.12.0-2+b1) ...
+#7 5.303 Setting up libbsd0:arm64 (0.11.7-2) ...
+#7 5.306 Setting up publicsuffix (20230209.2326-1) ...
+#7 5.310 Setting up libperl5.36:arm64 (5.36.0-7+deb12u1) ...
+#7 5.314 Setting up libxdmcp6:arm64 (1:1.1.2-3) ...
+#7 5.317 Setting up libxcb1:arm64 (1.15-1) ...
+#7 5.321 Setting up libedit2:arm64 (3.1-20221030-2) ...
+#7 5.325 Setting up libldap-2.5-0:arm64 (2.5.13+dfsg-5) ...
+#7 5.328 Setting up perl (5.36.0-7+deb12u1) ...
+#7 5.335 Setting up libx11-6:arm64 (2:1.8.4-2+deb12u2) ...
+#7 5.340 Setting up libxmuu1:arm64 (2:1.1.3-3) ...
+#7 5.343 Setting up openssh-client (1:9.2p1-2+deb12u5) ...
+#7 5.375 Setting up libxext6:arm64 (2:1.3.4-1+b1) ...
+#7 5.378 Setting up libcurl3-gnutls:arm64 (7.88.1-10+deb12u12) ...
+#7 5.384 Setting up liberror-perl (0.17029-2) ...
+#7 5.388 Setting up git (1:2.39.5-0+deb12u2) ...
+#7 5.396 Setting up xauth (1:1.1.2-1) ...
+#7 5.401 Processing triggers for libc-bin (2.36-9+deb12u10) ...
+#7 DONE 6.0s
+
+#8 [4/8] RUN pip install --no-cache-dir     numpy     pandas     scikit-learn     matplotlib     seaborn     plotly     networkx     python-louvain     umap-learn
+#8 1.604 Collecting numpy
+#8 1.779   Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (13.9 MB)
+#8 2.657      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.9/13.9 MB 19.1 MB/s eta 0:00:00
+#8 2.925 Collecting pandas
+#8 2.958   Downloading pandas-2.2.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (15.6 MB)
+#8 4.333      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.6/15.6 MB 10.1 MB/s eta 0:00:00
+#8 4.566 Collecting scikit-learn
+#8 4.656   Downloading scikit_learn-1.6.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (12.7 MB)
+#8 6.237      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 8.0 MB/s eta 0:00:00
+#8 6.576 Collecting matplotlib
+#8 6.610   Downloading matplotlib-3.9.4-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (8.2 MB)
+#8 8.385      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.2/8.2 MB 4.6 MB/s eta 0:00:00
+#8 8.466 Collecting seaborn
+#8 8.499   Downloading seaborn-0.13.2-py3-none-any.whl (294 kB)
+#8 8.564      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.9/294.9 kB 4.9 MB/s eta 0:00:00
+#8 8.674 Collecting plotly
+#8 8.713   Downloading plotly-6.0.1-py3-none-any.whl (14.8 MB)
+#8 11.66      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.8/14.8 MB 5.1 MB/s eta 0:00:00
+#8 11.83 Collecting networkx
+#8 11.86   Downloading networkx-3.2.1-py3-none-any.whl (1.6 MB)
+#8 12.24      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 4.4 MB/s eta 0:00:00
+#8 12.30 Collecting python-louvain
+#8 12.34   Downloading python-louvain-0.16.tar.gz (204 kB)
+#8 12.39      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 204.6/204.6 kB 3.9 MB/s eta 0:00:00
+#8 12.43   Preparing metadata (setup.py): started
+#8 12.62   Preparing metadata (setup.py): finished with status 'done'
+#8 12.66 Collecting umap-learn
+#8 12.70   Downloading umap_learn-0.5.7-py3-none-any.whl (88 kB)
+#8 12.72      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.8/88.8 kB 4.3 MB/s eta 0:00:00
+#8 12.83 Collecting python-dateutil>=2.8.2
+#8 12.86   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#8 12.93      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 4.1 MB/s eta 0:00:00
+#8 13.04 Collecting pytz>=2020.1
+#8 13.07   Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+#8 13.22      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 kB 3.6 MB/s eta 0:00:00
+#8 13.29 Collecting tzdata>=2022.7
+#8 13.33   Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+#8 13.43      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 347.8/347.8 kB 3.6 MB/s eta 0:00:00
+#8 13.55 Collecting threadpoolctl>=3.1.0
+#8 13.59   Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+#8 13.66 Collecting joblib>=1.2.0
+#8 13.69   Downloading joblib-1.4.2-py3-none-any.whl (301 kB)
+#8 13.77      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 301.8/301.8 kB 3.9 MB/s eta 0:00:00
+#8 14.00 Collecting scipy>=1.6.0
+#8 14.04   Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (33.7 MB)
+#8 24.52      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.7/33.7 MB 3.0 MB/s eta 0:00:00
+#8 24.65 Collecting pyparsing>=2.3.1
+#8 24.69   Downloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+#8 24.74      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.1/111.1 kB 2.1 MB/s eta 0:00:00
+#8 25.02 Collecting fonttools>=4.22.0
+#8 25.06   Downloading fonttools-4.57.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (4.6 MB)
+#8 26.76      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 2.7 MB/s eta 0:00:00
+#8 26.87 Collecting importlib-resources>=3.2.0
+#8 26.90   Downloading importlib_resources-6.5.2-py3-none-any.whl (37 kB)
+#8 26.96 Collecting cycler>=0.10
+#8 27.00   Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+#8 27.18 Collecting contourpy>=1.0.1
+#8 27.22   Downloading contourpy-1.3.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (309 kB)
+#8 27.36      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 309.2/309.2 kB 2.2 MB/s eta 0:00:00
+#8 27.84 Collecting pillow>=8
+#8 27.88   Downloading pillow-11.1.0-cp39-cp39-manylinux_2_28_aarch64.whl (4.4 MB)
+#8 29.30      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 3.1 MB/s eta 0:00:00
+#8 29.40 Collecting packaging>=20.0
+#8 29.43   Downloading packaging-24.2-py3-none-any.whl (65 kB)
+#8 29.45      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.5/65.5 kB 5.1 MB/s eta 0:00:00
+#8 29.60 Collecting kiwisolver>=1.3.1
+#8 29.63   Downloading kiwisolver-1.4.7-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (1.4 MB)
+#8 30.14      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 2.7 MB/s eta 0:00:00
+#8 30.25 Collecting narwhals>=1.15.1
+#8 30.29   Downloading narwhals-1.34.1-py3-none-any.whl (325 kB)
+#8 30.42      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 325.5/325.5 kB 2.5 MB/s eta 0:00:00
+#8 30.53 Collecting tqdm
+#8 30.56   Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+#8 30.59      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 3.4 MB/s eta 0:00:00
+#8 30.63 Collecting pynndescent>=0.5
+#8 30.67   Downloading pynndescent-0.5.13-py3-none-any.whl (56 kB)
+#8 30.69      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.9/56.9 kB 3.7 MB/s eta 0:00:00
+#8 30.91 Collecting numba>=0.51.2
+#8 30.95   Downloading numba-0.60.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (3.4 MB)
+#8 32.18      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 2.8 MB/s eta 0:00:00
+#8 32.34 Collecting zipp>=3.1.0
+#8 32.37   Downloading zipp-3.21.0-py3-none-any.whl (9.6 kB)
+#8 32.51 Collecting llvmlite<0.44,>=0.43.0dev0
+#8 32.55   Downloading llvmlite-0.43.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (42.9 MB)
+#8 51.31      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.9/42.9 MB 2.5 MB/s eta 0:00:00
+#8 51.51 Collecting six>=1.5
+#8 51.55   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#8 51.62 Building wheels for collected packages: python-louvain
+#8 51.62   Building wheel for python-louvain (setup.py): started
+#8 51.88   Building wheel for python-louvain (setup.py): finished with status 'done'
+#8 51.88   Created wheel for python-louvain: filename=python_louvain-0.16-py3-none-any.whl size=9407 sha256=2aa70084d6b6a2f19ef18bd0a2e4ee1e4c774b5dff0003296a5d27ec4a4a249c
+#8 51.88   Stored in directory: /tmp/pip-ephem-wheel-cache-3cgknyhu/wheels/4d/7c/b6/79b198e4ec43f915fbdf967953d48b89a18893b12aa9df0ae2
+#8 51.88 Successfully built python-louvain
+#8 52.19 Installing collected packages: pytz, zipp, tzdata, tqdm, threadpoolctl, six, pyparsing, pillow, packaging, numpy, networkx, narwhals, llvmlite, kiwisolver, joblib, fonttools, cycler, scipy, python-louvain, python-dateutil, plotly, numba, importlib-resources, contourpy, scikit-learn, pandas, matplotlib, seaborn, pynndescent, umap-learn
+#8 70.58 Successfully installed contourpy-1.3.0 cycler-0.12.1 fonttools-4.57.0 importlib-resources-6.5.2 joblib-1.4.2 kiwisolver-1.4.7 llvmlite-0.43.0 matplotlib-3.9.4 narwhals-1.34.1 networkx-3.2.1 numba-0.60.0 numpy-2.0.2 packaging-24.2 pandas-2.2.3 pillow-11.1.0 plotly-6.0.1 pynndescent-0.5.13 pyparsing-3.2.3 python-dateutil-2.9.0.post0 python-louvain-0.16 pytz-2025.2 scikit-learn-1.6.1 scipy-1.13.1 seaborn-0.13.2 six-1.17.0 threadpoolctl-3.6.0 tqdm-4.67.1 tzdata-2025.2 umap-learn-0.5.7 zipp-3.21.0
+#8 70.58 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 70.83 
+#8 70.83 [notice] A new release of pip is available: 23.0.1 -> 25.0.1
+#8 70.83 [notice] To update, run: pip install --upgrade pip
+#8 DONE 72.2s
+
+#9 [5/8] COPY . /app/
+#9 DONE 0.1s
+
+#10 [6/8] RUN mkdir -p /data/input /data/output /logs
+#10 DONE 0.1s
+
+#11 [7/8] RUN pip install -e .
+#11 0.351 Obtaining file:///app
+#11 0.351   Preparing metadata (setup.py): started
+#11 0.445   Preparing metadata (setup.py): finished with status 'done'
+#11 0.453 Requirement already satisfied: numpy in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (2.0.2)
+#11 0.453 Requirement already satisfied: pandas in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (2.2.3)
+#11 0.453 Requirement already satisfied: scikit-learn in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (1.6.1)
+#11 0.454 Requirement already satisfied: matplotlib in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (3.9.4)
+#11 0.454 Requirement already satisfied: seaborn in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (0.13.2)
+#11 0.454 Requirement already satisfied: plotly in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (6.0.1)
+#11 0.454 Requirement already satisfied: networkx in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (3.2.1)
+#11 0.455 Requirement already satisfied: python-louvain in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (0.16)
+#11 0.455 Requirement already satisfied: umap-learn in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (0.5.7)
+#11 0.461 Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (2.9.0.post0)
+#11 0.462 Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (3.2.3)
+#11 0.462 Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (1.4.7)
+#11 0.462 Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (24.2)
+#11 0.463 Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (0.12.1)
+#11 0.463 Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (1.3.0)
+#11 0.463 Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (11.1.0)
+#11 0.464 Requirement already satisfied: importlib-resources>=3.2.0 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (6.5.2)
+#11 0.465 Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (4.57.0)
+#11 0.517 Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.9/site-packages (from pandas->vectorizer==0.1.0) (2025.2)
+#11 0.517 Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.9/site-packages (from pandas->vectorizer==0.1.0) (2025.2)
+#11 0.519 Requirement already satisfied: narwhals>=1.15.1 in /usr/local/lib/python3.9/site-packages (from plotly->vectorizer==0.1.0) (1.34.1)
+#11 0.541 Requirement already satisfied: threadpoolctl>=3.1.0 in /usr/local/lib/python3.9/site-packages (from scikit-learn->vectorizer==0.1.0) (3.6.0)
+#11 0.541 Requirement already satisfied: joblib>=1.2.0 in /usr/local/lib/python3.9/site-packages (from scikit-learn->vectorizer==0.1.0) (1.4.2)
+#11 0.542 Requirement already satisfied: scipy>=1.6.0 in /usr/local/lib/python3.9/site-packages (from scikit-learn->vectorizer==0.1.0) (1.13.1)
+#11 0.556 Requirement already satisfied: numba>=0.51.2 in /usr/local/lib/python3.9/site-packages (from umap-learn->vectorizer==0.1.0) (0.60.0)
+#11 0.556 Requirement already satisfied: pynndescent>=0.5 in /usr/local/lib/python3.9/site-packages (from umap-learn->vectorizer==0.1.0) (0.5.13)
+#11 0.556 Requirement already satisfied: tqdm in /usr/local/lib/python3.9/site-packages (from umap-learn->vectorizer==0.1.0) (4.67.1)
+#11 0.589 Requirement already satisfied: zipp>=3.1.0 in /usr/local/lib/python3.9/site-packages (from importlib-resources>=3.2.0->matplotlib->vectorizer==0.1.0) (3.21.0)
+#11 0.598 Requirement already satisfied: llvmlite<0.44,>=0.43.0dev0 in /usr/local/lib/python3.9/site-packages (from numba>=0.51.2->umap-learn->vectorizer==0.1.0) (0.43.0)
+#11 0.613 Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.9/site-packages (from python-dateutil>=2.7->matplotlib->vectorizer==0.1.0) (1.17.0)
+#11 0.665 Installing collected packages: vectorizer
+#11 0.665   Running setup.py develop for vectorizer
+#11 0.989 Successfully installed vectorizer-0.1.0
+#11 0.989 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#11 1.238 
+#11 1.238 [notice] A new release of pip is available: 23.0.1 -> 25.0.1
+#11 1.238 [notice] To update, run: pip install --upgrade pip
+#11 DONE 1.3s
+
+#12 [8/8] RUN echo '#!/bin/bash\nLOG_DIR="/logs"\nmkdir -p "$LOG_DIR"\nTIMESTAMP=$(date +%Y%m%d_%H%M%S)\n\nif [ "$1" = "analyze" ]; then\n  echo "Analyzing files in /data/input..."\n  python /app/py/analyze_filesystem.py 2>&1 | tee "$LOG_DIR/analyze_$TIMESTAMP.log"\nelif [ "$1" = "visualize" ]; then\n  echo "Visualizing results..."\n  python /app/py/visualize_results.py 2>&1 | tee "$LOG_DIR/visualize_$TIMESTAMP.log"\nelse\n  echo "Available commands:"\n  echo "  analyze - Analyze files in /data/input"\n  echo "  visualize - Visualize analysis results"\nfi' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
+#12 DONE 0.2s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 3.1s done
+#13 writing image sha256:5ae6c2066fb9155bb82115854b7fbd907781e02c0255a5a95c9edb26de8b3b9a
+#13 writing image sha256:5ae6c2066fb9155bb82115854b7fbd907781e02c0255a5a95c9edb26de8b3b9a done
+#13 naming to docker.io/library/vectorizer_diskvoyeur done
+#13 DONE 3.2s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/psaq7ewdo6djo8m0gonwygkmn
+[0;34m[INFO][0m Running DISKVOYEUR analysis...
+Removing network vectorizer_diskvoyeur-network
+Network vectorizer_diskvoyeur-network not found.
+Creating network "vectorizer_diskvoyeur-network" with driver "bridge"
+Creating diskvoyeur_analyzer ... 
+Creating diskvoyeur_analyzer ... done
+Attaching to diskvoyeur_analyzer
+[36mdiskvoyeur_analyzer |[0m Analyzing files in /data/input...
+[36mdiskvoyeur_analyzer |[0m DISKVOYEUR Analysis
+[36mdiskvoyeur_analyzer |[0m ==================
+[36mdiskvoyeur_analyzer |[0m Collecting files from /data/input...
+[36mdiskvoyeur_analyzer |[0m Found 10 files
+[36mdiskvoyeur_analyzer |[0m Extracting features...
+[36mdiskvoyeur_analyzer |[0m Extracted features for 10 files
+[36mdiskvoyeur_analyzer |[0m Analyzing data...
+[36mdiskvoyeur_analyzer |[0m Using 13 numeric features: ['size_log', 'age_days', 'depth', 'filename_length', 'is_hidden', 'has_extension', 'extension_length', 'path_length', 'dirname_length', 'dot_count', 'underscore_count', 'hyphen_count', 'number_count']
+[36mdiskvoyeur_analyzer |[0m Vector shape: (10, 13)
+[36mdiskvoyeur_analyzer |[0m Detecting anomalies...
+[36mdiskvoyeur_analyzer |[0m Clustering files...
+[36mdiskvoyeur_analyzer |[0m Finding duplicates...
+[36mdiskvoyeur_analyzer |[0m Projecting to 2D...
+[36mdiskvoyeur_analyzer |[0m Perplexity adjusted to 4 for 10 samples
+[36mdiskvoyeur_analyzer |[0m Creating visualizations...
+[36mdiskvoyeur_analyzer |[0m Saved plot to /data/output/pca_scatter.png
+[36mdiskvoyeur_analyzer |[0m Saved plot to /data/output/tsne_clusters.png
+[36mdiskvoyeur_analyzer |[0m Saved heatmap to /data/output/similarity_heatmap.png
+[36mdiskvoyeur_analyzer |[0m Visualizations saved to /data/output
+[36mdiskvoyeur_analyzer |[0m Analysis complete. Results saved to output directory.
+[36mdiskvoyeur_analyzer exited with code 0
+[0m[0;32m[SUCCESS][0m Analysis completed successfully!
+[0;34m[INFO][0m Generating visualizations...
+Building diskvoyeur-viz
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.39kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.9-slim
+#2 DONE 0.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/8] FROM docker.io/library/python:3.9-slim@sha256:9aa5793609640ecea2f06451a0d6f379330880b413f954933289cf3b27a78567
+#4 DONE 0.0s
+
+#5 [2/8] WORKDIR /app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 405.94kB 0.0s done
+#6 DONE 0.0s
+
+#7 [3/8] RUN apt-get update && apt-get install -y     tar     gzip     git     && rm -rf /var/lib/apt/lists/*
+#7 0.312 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#7 0.436 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#7 0.477 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+#7 0.522 Get:4 http://deb.debian.org/debian bookworm/main arm64 Packages [8692 kB]
+#7 0.940 Get:5 http://deb.debian.org/debian bookworm-updates/main arm64 Packages [512 B]
+#7 0.971 Get:6 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages [248 kB]
+#7 1.639 Fetched 9195 kB in 1s (6227 kB/s)
+#7 1.639 Reading package lists...
+#7 1.954 Reading package lists...
+#7 2.249 Building dependency tree...
+#7 2.320 Reading state information...
+#7 2.403 tar is already the newest version (1.34+dfsg-1.2+deb12u1).
+#7 2.403 tar set to manually installed.
+#7 2.403 gzip is already the newest version (1.12-1).
+#7 2.403 gzip set to manually installed.
+#7 2.403 The following additional packages will be installed:
+#7 2.403   git-man less libbrotli1 libbsd0 libcbor0.8 libcurl3-gnutls libedit2
+#7 2.403   liberror-perl libexpat1 libfido2-1 libgdbm-compat4 libldap-2.5-0
+#7 2.403   libldap-common libnghttp2-14 libperl5.36 libpsl5 librtmp1 libsasl2-2
+#7 2.403   libsasl2-modules libsasl2-modules-db libssh2-1 libx11-6 libx11-data libxau6
+#7 2.403   libxcb1 libxdmcp6 libxext6 libxmuu1 openssh-client patch perl
+#7 2.403   perl-modules-5.36 publicsuffix xauth
+#7 2.404 Suggested packages:
+#7 2.404   gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui
+#7 2.404   gitk gitweb git-cvs git-mediawiki git-svn sensible-utils
+#7 2.404   libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+#7 2.404   libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql keychain
+#7 2.404   libpam-ssh monkeysphere ssh-askpass ed diffutils-doc perl-doc
+#7 2.404   libterm-readline-gnu-perl | libterm-readline-perl-perl make
+#7 2.404   libtap-harness-archive-perl
+#7 2.555 The following NEW packages will be installed:
+#7 2.555   git git-man less libbrotli1 libbsd0 libcbor0.8 libcurl3-gnutls libedit2
+#7 2.555   liberror-perl libexpat1 libfido2-1 libgdbm-compat4 libldap-2.5-0
+#7 2.555   libldap-common libnghttp2-14 libperl5.36 libpsl5 librtmp1 libsasl2-2
+#7 2.555   libsasl2-modules libsasl2-modules-db libssh2-1 libx11-6 libx11-data libxau6
+#7 2.555   libxcb1 libxdmcp6 libxext6 libxmuu1 openssh-client patch perl
+#7 2.555   perl-modules-5.36 publicsuffix xauth
+#7 2.713 0 upgraded, 35 newly installed, 0 to remove and 0 not upgraded.
+#7 2.713 Need to get 20.7 MB of archives.
+#7 2.713 After this operation, 116 MB of additional disk space will be used.
+#7 2.713 Get:1 http://deb.debian.org/debian bookworm/main arm64 perl-modules-5.36 all 5.36.0-7+deb12u1 [2815 kB]
+#7 3.013 Get:2 http://deb.debian.org/debian bookworm/main arm64 libgdbm-compat4 arm64 1.23-3 [48.0 kB]
+#7 3.016 Get:3 http://deb.debian.org/debian bookworm/main arm64 libperl5.36 arm64 5.36.0-7+deb12u1 [4014 kB]
+#7 3.142 Get:4 http://deb.debian.org/debian bookworm/main arm64 perl arm64 5.36.0-7+deb12u1 [239 kB]
+#7 3.146 Get:5 http://deb.debian.org/debian bookworm/main arm64 less arm64 590-2.1~deb12u2 [128 kB]
+#7 3.147 Get:6 http://deb.debian.org/debian bookworm/main arm64 libbsd0 arm64 0.11.7-2 [115 kB]
+#7 3.151 Get:7 http://deb.debian.org/debian bookworm/main arm64 libedit2 arm64 3.1-20221030-2 [88.1 kB]
+#7 3.152 Get:8 http://deb.debian.org/debian bookworm/main arm64 libcbor0.8 arm64 0.8.0-2+b1 [26.0 kB]
+#7 3.153 Get:9 http://deb.debian.org/debian bookworm/main arm64 libfido2-1 arm64 1.12.0-2+b1 [72.6 kB]
+#7 3.166 Get:10 http://deb.debian.org/debian bookworm/main arm64 openssh-client arm64 1:9.2p1-2+deb12u5 [935 kB]
+#7 3.191 Get:11 http://deb.debian.org/debian bookworm/main arm64 libbrotli1 arm64 1.0.9-2+b6 [269 kB]
+#7 3.194 Get:12 http://deb.debian.org/debian bookworm/main arm64 libsasl2-modules-db arm64 2.1.28+dfsg-10 [20.8 kB]
+#7 3.195 Get:13 http://deb.debian.org/debian bookworm/main arm64 libsasl2-2 arm64 2.1.28+dfsg-10 [58.0 kB]
+#7 3.202 Get:14 http://deb.debian.org/debian bookworm/main arm64 libldap-2.5-0 arm64 2.5.13+dfsg-5 [171 kB]
+#7 3.203 Get:15 http://deb.debian.org/debian bookworm/main arm64 libnghttp2-14 arm64 1.52.0-1+deb12u2 [68.6 kB]
+#7 3.223 Get:16 http://deb.debian.org/debian bookworm/main arm64 libpsl5 arm64 0.21.2-1 [58.6 kB]
+#7 3.229 Get:17 http://deb.debian.org/debian bookworm/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2+b2 [59.4 kB]
+#7 3.272 Get:18 http://deb.debian.org/debian bookworm/main arm64 libssh2-1 arm64 1.10.0-3+b1 [172 kB]
+#7 3.378 Get:19 http://deb.debian.org/debian bookworm/main arm64 libcurl3-gnutls arm64 7.88.1-10+deb12u12 [362 kB]
+#7 3.380 Get:20 http://deb.debian.org/debian bookworm/main arm64 libexpat1 arm64 2.5.0-1+deb12u1 [84.6 kB]
+#7 3.381 Get:21 http://deb.debian.org/debian bookworm/main arm64 liberror-perl all 0.17029-2 [29.0 kB]
+#7 3.382 Get:22 http://deb.debian.org/debian bookworm/main arm64 git-man all 1:2.39.5-0+deb12u2 [2053 kB]
+#7 3.482 Get:23 http://deb.debian.org/debian bookworm/main arm64 git arm64 1:2.39.5-0+deb12u2 [7148 kB]
+#7 3.685 Get:24 http://deb.debian.org/debian bookworm/main arm64 libldap-common all 2.5.13+dfsg-5 [29.3 kB]
+#7 3.686 Get:25 http://deb.debian.org/debian bookworm/main arm64 libsasl2-modules arm64 2.1.28+dfsg-10 [63.1 kB]
+#7 3.687 Get:26 http://deb.debian.org/debian bookworm/main arm64 libxau6 arm64 1:1.0.9-1 [19.7 kB]
+#7 3.687 Get:27 http://deb.debian.org/debian bookworm/main arm64 libxdmcp6 arm64 1:1.1.2-3 [25.4 kB]
+#7 3.688 Get:28 http://deb.debian.org/debian bookworm/main arm64 libxcb1 arm64 1.15-1 [143 kB]
+#7 3.688 Get:29 http://deb.debian.org/debian bookworm/main arm64 libx11-data all 2:1.8.4-2+deb12u2 [292 kB]
+#7 3.690 Get:30 http://deb.debian.org/debian bookworm/main arm64 libx11-6 arm64 2:1.8.4-2+deb12u2 [735 kB]
+#7 3.714 Get:31 http://deb.debian.org/debian bookworm/main arm64 libxext6 arm64 2:1.3.4-1+b1 [51.7 kB]
+#7 3.715 Get:32 http://deb.debian.org/debian bookworm/main arm64 libxmuu1 arm64 2:1.1.3-3 [24.0 kB]
+#7 3.761 Get:33 http://deb.debian.org/debian bookworm/main arm64 patch arm64 2.7.6-7 [121 kB]
+#7 3.763 Get:34 http://deb.debian.org/debian bookworm/main arm64 publicsuffix all 20230209.2326-1 [126 kB]
+#7 3.766 Get:35 http://deb.debian.org/debian bookworm/main arm64 xauth arm64 1:1.1.2-1 [35.5 kB]
+#7 3.880 debconf: delaying package configuration, since apt-utils is not installed
+#7 3.906 Fetched 20.7 MB in 1s (17.2 MB/s)
+#7 3.918 Selecting previously unselected package perl-modules-5.36.
+#7 3.918 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6682 files and directories currently installed.)
+#7 3.927 Preparing to unpack .../00-perl-modules-5.36_5.36.0-7+deb12u1_all.deb ...
+#7 3.930 Unpacking perl-modules-5.36 (5.36.0-7+deb12u1) ...
+#7 4.388 Selecting previously unselected package libgdbm-compat4:arm64.
+#7 4.390 Preparing to unpack .../01-libgdbm-compat4_1.23-3_arm64.deb ...
+#7 4.393 Unpacking libgdbm-compat4:arm64 (1.23-3) ...
+#7 4.410 Selecting previously unselected package libperl5.36:arm64.
+#7 4.411 Preparing to unpack .../02-libperl5.36_5.36.0-7+deb12u1_arm64.deb ...
+#7 4.412 Unpacking libperl5.36:arm64 (5.36.0-7+deb12u1) ...
+#7 4.685 Selecting previously unselected package perl.
+#7 4.686 Preparing to unpack .../03-perl_5.36.0-7+deb12u1_arm64.deb ...
+#7 4.689 Unpacking perl (5.36.0-7+deb12u1) ...
+#7 4.716 Selecting previously unselected package less.
+#7 4.717 Preparing to unpack .../04-less_590-2.1~deb12u2_arm64.deb ...
+#7 4.719 Unpacking less (590-2.1~deb12u2) ...
+#7 4.738 Selecting previously unselected package libbsd0:arm64.
+#7 4.739 Preparing to unpack .../05-libbsd0_0.11.7-2_arm64.deb ...
+#7 4.740 Unpacking libbsd0:arm64 (0.11.7-2) ...
+#7 4.760 Selecting previously unselected package libedit2:arm64.
+#7 4.761 Preparing to unpack .../06-libedit2_3.1-20221030-2_arm64.deb ...
+#7 4.763 Unpacking libedit2:arm64 (3.1-20221030-2) ...
+#7 4.784 Selecting previously unselected package libcbor0.8:arm64.
+#7 4.785 Preparing to unpack .../07-libcbor0.8_0.8.0-2+b1_arm64.deb ...
+#7 4.786 Unpacking libcbor0.8:arm64 (0.8.0-2+b1) ...
+#7 4.801 Selecting previously unselected package libfido2-1:arm64.
+#7 4.802 Preparing to unpack .../08-libfido2-1_1.12.0-2+b1_arm64.deb ...
+#7 4.803 Unpacking libfido2-1:arm64 (1.12.0-2+b1) ...
+#7 4.823 Selecting previously unselected package openssh-client.
+#7 4.824 Preparing to unpack .../09-openssh-client_1%3a9.2p1-2+deb12u5_arm64.deb ...
+#7 4.827 Unpacking openssh-client (1:9.2p1-2+deb12u5) ...
+#7 4.898 Selecting previously unselected package libbrotli1:arm64.
+#7 4.899 Preparing to unpack .../10-libbrotli1_1.0.9-2+b6_arm64.deb ...
+#7 4.900 Unpacking libbrotli1:arm64 (1.0.9-2+b6) ...
+#7 4.926 Selecting previously unselected package libsasl2-modules-db:arm64.
+#7 4.926 Preparing to unpack .../11-libsasl2-modules-db_2.1.28+dfsg-10_arm64.deb ...
+#7 4.928 Unpacking libsasl2-modules-db:arm64 (2.1.28+dfsg-10) ...
+#7 4.939 Selecting previously unselected package libsasl2-2:arm64.
+#7 4.940 Preparing to unpack .../12-libsasl2-2_2.1.28+dfsg-10_arm64.deb ...
+#7 4.943 Unpacking libsasl2-2:arm64 (2.1.28+dfsg-10) ...
+#7 4.957 Selecting previously unselected package libldap-2.5-0:arm64.
+#7 4.958 Preparing to unpack .../13-libldap-2.5-0_2.5.13+dfsg-5_arm64.deb ...
+#7 4.959 Unpacking libldap-2.5-0:arm64 (2.5.13+dfsg-5) ...
+#7 4.983 Selecting previously unselected package libnghttp2-14:arm64.
+#7 4.984 Preparing to unpack .../14-libnghttp2-14_1.52.0-1+deb12u2_arm64.deb ...
+#7 4.989 Unpacking libnghttp2-14:arm64 (1.52.0-1+deb12u2) ...
+#7 5.008 Selecting previously unselected package libpsl5:arm64.
+#7 5.009 Preparing to unpack .../15-libpsl5_0.21.2-1_arm64.deb ...
+#7 5.011 Unpacking libpsl5:arm64 (0.21.2-1) ...
+#7 5.034 Selecting previously unselected package librtmp1:arm64.
+#7 5.036 Preparing to unpack .../16-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_arm64.deb ...
+#7 5.039 Unpacking librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+#7 5.058 Selecting previously unselected package libssh2-1:arm64.
+#7 5.059 Preparing to unpack .../17-libssh2-1_1.10.0-3+b1_arm64.deb ...
+#7 5.060 Unpacking libssh2-1:arm64 (1.10.0-3+b1) ...
+#7 5.085 Selecting previously unselected package libcurl3-gnutls:arm64.
+#7 5.086 Preparing to unpack .../18-libcurl3-gnutls_7.88.1-10+deb12u12_arm64.deb ...
+#7 5.089 Unpacking libcurl3-gnutls:arm64 (7.88.1-10+deb12u12) ...
+#7 5.119 Selecting previously unselected package libexpat1:arm64.
+#7 5.121 Preparing to unpack .../19-libexpat1_2.5.0-1+deb12u1_arm64.deb ...
+#7 5.123 Unpacking libexpat1:arm64 (2.5.0-1+deb12u1) ...
+#7 5.148 Selecting previously unselected package liberror-perl.
+#7 5.149 Preparing to unpack .../20-liberror-perl_0.17029-2_all.deb ...
+#7 5.152 Unpacking liberror-perl (0.17029-2) ...
+#7 5.197 Selecting previously unselected package git-man.
+#7 5.198 Preparing to unpack .../21-git-man_1%3a2.39.5-0+deb12u2_all.deb ...
+#7 5.200 Unpacking git-man (1:2.39.5-0+deb12u2) ...
+#7 5.318 Selecting previously unselected package git.
+#7 5.320 Preparing to unpack .../22-git_1%3a2.39.5-0+deb12u2_arm64.deb ...
+#7 5.325 Unpacking git (1:2.39.5-0+deb12u2) ...
+#7 5.651 Selecting previously unselected package libldap-common.
+#7 5.652 Preparing to unpack .../23-libldap-common_2.5.13+dfsg-5_all.deb ...
+#7 5.654 Unpacking libldap-common (2.5.13+dfsg-5) ...
+#7 5.669 Selecting previously unselected package libsasl2-modules:arm64.
+#7 5.670 Preparing to unpack .../24-libsasl2-modules_2.1.28+dfsg-10_arm64.deb ...
+#7 5.673 Unpacking libsasl2-modules:arm64 (2.1.28+dfsg-10) ...
+#7 5.690 Selecting previously unselected package libxau6:arm64.
+#7 5.690 Preparing to unpack .../25-libxau6_1%3a1.0.9-1_arm64.deb ...
+#7 5.692 Unpacking libxau6:arm64 (1:1.0.9-1) ...
+#7 5.704 Selecting previously unselected package libxdmcp6:arm64.
+#7 5.705 Preparing to unpack .../26-libxdmcp6_1%3a1.1.2-3_arm64.deb ...
+#7 5.706 Unpacking libxdmcp6:arm64 (1:1.1.2-3) ...
+#7 5.719 Selecting previously unselected package libxcb1:arm64.
+#7 5.720 Preparing to unpack .../27-libxcb1_1.15-1_arm64.deb ...
+#7 5.721 Unpacking libxcb1:arm64 (1.15-1) ...
+#7 5.739 Selecting previously unselected package libx11-data.
+#7 5.740 Preparing to unpack .../28-libx11-data_2%3a1.8.4-2+deb12u2_all.deb ...
+#7 5.741 Unpacking libx11-data (2:1.8.4-2+deb12u2) ...
+#7 5.786 Selecting previously unselected package libx11-6:arm64.
+#7 5.787 Preparing to unpack .../29-libx11-6_2%3a1.8.4-2+deb12u2_arm64.deb ...
+#7 5.788 Unpacking libx11-6:arm64 (2:1.8.4-2+deb12u2) ...
+#7 5.840 Selecting previously unselected package libxext6:arm64.
+#7 5.841 Preparing to unpack .../30-libxext6_2%3a1.3.4-1+b1_arm64.deb ...
+#7 5.844 Unpacking libxext6:arm64 (2:1.3.4-1+b1) ...
+#7 5.859 Selecting previously unselected package libxmuu1:arm64.
+#7 5.860 Preparing to unpack .../31-libxmuu1_2%3a1.1.3-3_arm64.deb ...
+#7 5.861 Unpacking libxmuu1:arm64 (2:1.1.3-3) ...
+#7 5.873 Selecting previously unselected package patch.
+#7 5.874 Preparing to unpack .../32-patch_2.7.6-7_arm64.deb ...
+#7 5.875 Unpacking patch (2.7.6-7) ...
+#7 5.892 Selecting previously unselected package publicsuffix.
+#7 5.893 Preparing to unpack .../33-publicsuffix_20230209.2326-1_all.deb ...
+#7 5.894 Unpacking publicsuffix (20230209.2326-1) ...
+#7 5.910 Selecting previously unselected package xauth.
+#7 5.911 Preparing to unpack .../34-xauth_1%3a1.1.2-1_arm64.deb ...
+#7 5.912 Unpacking xauth (1:1.1.2-1) ...
+#7 5.929 Setting up libexpat1:arm64 (2.5.0-1+deb12u1) ...
+#7 5.933 Setting up libxau6:arm64 (1:1.0.9-1) ...
+#7 5.939 Setting up libpsl5:arm64 (0.21.2-1) ...
+#7 5.943 Setting up libcbor0.8:arm64 (0.8.0-2+b1) ...
+#7 5.947 Setting up libbrotli1:arm64 (1.0.9-2+b6) ...
+#7 5.951 Setting up libsasl2-modules:arm64 (2.1.28+dfsg-10) ...
+#7 5.957 Setting up libnghttp2-14:arm64 (1.52.0-1+deb12u2) ...
+#7 5.961 Setting up less (590-2.1~deb12u2) ...
+#7 5.969 Setting up libldap-common (2.5.13+dfsg-5) ...
+#7 5.976 Setting up libsasl2-modules-db:arm64 (2.1.28+dfsg-10) ...
+#7 5.979 Setting up perl-modules-5.36 (5.36.0-7+deb12u1) ...
+#7 5.983 Setting up libx11-data (2:1.8.4-2+deb12u2) ...
+#7 5.989 Setting up librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+#7 5.994 Setting up patch (2.7.6-7) ...
+#7 6.004 Setting up libgdbm-compat4:arm64 (1.23-3) ...
+#7 6.010 Setting up libsasl2-2:arm64 (2.1.28+dfsg-10) ...
+#7 6.014 Setting up git-man (1:2.39.5-0+deb12u2) ...
+#7 6.027 Setting up libssh2-1:arm64 (1.10.0-3+b1) ...
+#7 6.032 Setting up libfido2-1:arm64 (1.12.0-2+b1) ...
+#7 6.035 Setting up libbsd0:arm64 (0.11.7-2) ...
+#7 6.040 Setting up publicsuffix (20230209.2326-1) ...
+#7 6.044 Setting up libperl5.36:arm64 (5.36.0-7+deb12u1) ...
+#7 6.047 Setting up libxdmcp6:arm64 (1:1.1.2-3) ...
+#7 6.051 Setting up libxcb1:arm64 (1.15-1) ...
+#7 6.056 Setting up libedit2:arm64 (3.1-20221030-2) ...
+#7 6.058 Setting up libldap-2.5-0:arm64 (2.5.13+dfsg-5) ...
+#7 6.063 Setting up perl (5.36.0-7+deb12u1) ...
+#7 6.070 Setting up libx11-6:arm64 (2:1.8.4-2+deb12u2) ...
+#7 6.074 Setting up libxmuu1:arm64 (2:1.1.3-3) ...
+#7 6.078 Setting up openssh-client (1:9.2p1-2+deb12u5) ...
+#7 6.118 Setting up libxext6:arm64 (2:1.3.4-1+b1) ...
+#7 6.122 Setting up libcurl3-gnutls:arm64 (7.88.1-10+deb12u12) ...
+#7 6.125 Setting up liberror-perl (0.17029-2) ...
+#7 6.129 Setting up git (1:2.39.5-0+deb12u2) ...
+#7 6.134 Setting up xauth (1:1.1.2-1) ...
+#7 6.138 Processing triggers for libc-bin (2.36-9+deb12u10) ...
+#7 DONE 6.3s
+
+#8 [4/8] RUN pip install --no-cache-dir     numpy     pandas     scikit-learn     matplotlib     seaborn     plotly     networkx     python-louvain     umap-learn
+#8 2.043 Collecting numpy
+#8 2.190   Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (13.9 MB)
+#8 2.765      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.9/13.9 MB 31.9 MB/s eta 0:00:00
+#8 3.020 Collecting pandas
+#8 3.047   Downloading pandas-2.2.3-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (15.6 MB)
+#8 3.517      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.6/15.6 MB 33.1 MB/s eta 0:00:00
+#8 3.713 Collecting scikit-learn
+#8 3.742   Downloading scikit_learn-1.6.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (12.7 MB)
+#8 4.106      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 35.1 MB/s eta 0:00:00
+#8 4.442 Collecting matplotlib
+#8 4.463   Downloading matplotlib-3.9.4-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (8.2 MB)
+#8 4.726      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.2/8.2 MB 32.3 MB/s eta 0:00:00
+#8 4.799 Collecting seaborn
+#8 4.825   Downloading seaborn-0.13.2-py3-none-any.whl (294 kB)
+#8 4.838      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.9/294.9 kB 81.5 MB/s eta 0:00:00
+#8 4.946 Collecting plotly
+#8 4.986   Downloading plotly-6.0.1-py3-none-any.whl (14.8 MB)
+#8 5.471      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.8/14.8 MB 30.7 MB/s eta 0:00:00
+#8 5.649 Collecting networkx
+#8 5.672   Downloading networkx-3.2.1-py3-none-any.whl (1.6 MB)
+#8 5.724      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 34.2 MB/s eta 0:00:00
+#8 5.768 Collecting python-louvain
+#8 5.797   Downloading python-louvain-0.16.tar.gz (204 kB)
+#8 5.803      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 204.6/204.6 kB 63.3 MB/s eta 0:00:00
+#8 5.827   Preparing metadata (setup.py): started
+#8 6.095   Preparing metadata (setup.py): finished with status 'done'
+#8 6.150 Collecting umap-learn
+#8 6.184   Downloading umap_learn-0.5.7-py3-none-any.whl (88 kB)
+#8 6.187      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.8/88.8 kB 300.2 MB/s eta 0:00:00
+#8 6.322 Collecting python-dateutil>=2.8.2
+#8 6.350   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#8 6.359      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 81.3 MB/s eta 0:00:00
+#8 6.449 Collecting pytz>=2020.1
+#8 6.471   Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+#8 6.490      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 kB 46.1 MB/s eta 0:00:00
+#8 6.544 Collecting tzdata>=2022.7
+#8 6.566   Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+#8 6.580      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 347.8/347.8 kB 41.4 MB/s eta 0:00:00
+#8 6.852 Collecting scipy>=1.6.0
+#8 6.880   Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (33.7 MB)
+#8 7.930      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.7/33.7 MB 32.0 MB/s eta 0:00:00
+#8 8.030 Collecting threadpoolctl>=3.1.0
+#8 8.054   Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+#8 8.123 Collecting joblib>=1.2.0
+#8 8.150   Downloading joblib-1.4.2-py3-none-any.whl (301 kB)
+#8 8.159      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 301.8/301.8 kB 48.0 MB/s eta 0:00:00
+#8 8.318 Collecting contourpy>=1.0.1
+#8 8.346   Downloading contourpy-1.3.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (309 kB)
+#8 8.351      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 309.2/309.2 kB 104.1 MB/s eta 0:00:00
+#8 8.391 Collecting cycler>=0.10
+#8 8.426   Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+#8 8.680 Collecting fonttools>=4.22.0
+#8 8.731   Downloading fonttools-4.57.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (4.6 MB)
+#8 8.898      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 29.6 MB/s eta 0:00:00
+#8 8.980 Collecting importlib-resources>=3.2.0
+#8 9.004   Downloading importlib_resources-6.5.2-py3-none-any.whl (37 kB)
+#8 9.124 Collecting kiwisolver>=1.3.1
+#8 9.177   Downloading kiwisolver-1.4.7-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (1.4 MB)
+#8 9.230      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 29.3 MB/s eta 0:00:00
+#8 9.312 Collecting pyparsing>=2.3.1
+#8 9.346   Downloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+#8 9.350      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 111.1/111.1 kB 238.0 MB/s eta 0:00:00
+#8 9.725 Collecting pillow>=8
+#8 9.751   Downloading pillow-11.1.0-cp39-cp39-manylinux_2_28_aarch64.whl (4.4 MB)
+#8 9.908      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 28.3 MB/s eta 0:00:00
+#8 9.994 Collecting packaging>=20.0
+#8 10.03   Downloading packaging-24.2-py3-none-any.whl (65 kB)
+#8 10.03      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.5/65.5 kB 154.5 MB/s eta 0:00:00
+#8 10.17 Collecting narwhals>=1.15.1
+#8 10.20   Downloading narwhals-1.34.1-py3-none-any.whl (325 kB)
+#8 10.20      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 325.5/325.5 kB 141.8 MB/s eta 0:00:00
+#8 10.27 Collecting pynndescent>=0.5
+#8 10.29   Downloading pynndescent-0.5.13-py3-none-any.whl (56 kB)
+#8 10.29      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.9/56.9 kB 234.4 MB/s eta 0:00:00
+#8 10.39 Collecting tqdm
+#8 10.42   Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+#8 10.42      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 105.0 MB/s eta 0:00:00
+#8 10.66 Collecting numba>=0.51.2
+#8 10.71   Downloading numba-0.60.0-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (3.4 MB)
+#8 10.81      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 36.8 MB/s eta 0:00:00
+#8 11.19 Collecting zipp>=3.1.0
+#8 11.21   Downloading zipp-3.21.0-py3-none-any.whl (9.6 kB)
+#8 11.36 Collecting llvmlite<0.44,>=0.43.0dev0
+#8 11.38   Downloading llvmlite-0.43.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (42.9 MB)
+#8 12.75      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.9/42.9 MB 31.0 MB/s eta 0:00:00
+#8 12.88 Collecting six>=1.5
+#8 12.91   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#8 12.97 Building wheels for collected packages: python-louvain
+#8 12.97   Building wheel for python-louvain (setup.py): started
+#8 13.20   Building wheel for python-louvain (setup.py): finished with status 'done'
+#8 13.20   Created wheel for python-louvain: filename=python_louvain-0.16-py3-none-any.whl size=9407 sha256=c0875bf34d90083c42d21edf2c7e3eb42ec9a57585193df55c40e21f634b7935
+#8 13.20   Stored in directory: /tmp/pip-ephem-wheel-cache-bxg1tznp/wheels/4d/7c/b6/79b198e4ec43f915fbdf967953d48b89a18893b12aa9df0ae2
+#8 13.20 Successfully built python-louvain
+#8 13.48 Installing collected packages: pytz, zipp, tzdata, tqdm, threadpoolctl, six, pyparsing, pillow, packaging, numpy, networkx, narwhals, llvmlite, kiwisolver, joblib, fonttools, cycler, scipy, python-louvain, python-dateutil, plotly, numba, importlib-resources, contourpy, scikit-learn, pandas, matplotlib, seaborn, pynndescent, umap-learn
+#8 34.33 Successfully installed contourpy-1.3.0 cycler-0.12.1 fonttools-4.57.0 importlib-resources-6.5.2 joblib-1.4.2 kiwisolver-1.4.7 llvmlite-0.43.0 matplotlib-3.9.4 narwhals-1.34.1 networkx-3.2.1 numba-0.60.0 numpy-2.0.2 packaging-24.2 pandas-2.2.3 pillow-11.1.0 plotly-6.0.1 pynndescent-0.5.13 pyparsing-3.2.3 python-dateutil-2.9.0.post0 python-louvain-0.16 pytz-2025.2 scikit-learn-1.6.1 scipy-1.13.1 seaborn-0.13.2 six-1.17.0 threadpoolctl-3.6.0 tqdm-4.67.1 tzdata-2025.2 umap-learn-0.5.7 zipp-3.21.0
+#8 34.33 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 34.60 
+#8 34.60 [notice] A new release of pip is available: 23.0.1 -> 25.0.1
+#8 34.60 [notice] To update, run: pip install --upgrade pip
+#8 DONE 35.4s
+
+#9 [5/8] COPY . /app/
+#9 DONE 0.1s
+
+#10 [6/8] RUN mkdir -p /data/input /data/output /logs
+#10 DONE 0.1s
+
+#11 [7/8] RUN pip install -e .
+#11 0.329 Obtaining file:///app
+#11 0.329   Preparing metadata (setup.py): started
+#11 0.430   Preparing metadata (setup.py): finished with status 'done'
+#11 0.437 Requirement already satisfied: numpy in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (2.0.2)
+#11 0.438 Requirement already satisfied: pandas in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (2.2.3)
+#11 0.438 Requirement already satisfied: scikit-learn in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (1.6.1)
+#11 0.438 Requirement already satisfied: matplotlib in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (3.9.4)
+#11 0.439 Requirement already satisfied: seaborn in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (0.13.2)
+#11 0.439 Requirement already satisfied: plotly in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (6.0.1)
+#11 0.439 Requirement already satisfied: networkx in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (3.2.1)
+#11 0.440 Requirement already satisfied: python-louvain in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (0.16)
+#11 0.440 Requirement already satisfied: umap-learn in /usr/local/lib/python3.9/site-packages (from vectorizer==0.1.0) (0.5.7)
+#11 0.447 Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (2.9.0.post0)
+#11 0.448 Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (1.3.0)
+#11 0.449 Requirement already satisfied: importlib-resources>=3.2.0 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (6.5.2)
+#11 0.449 Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (1.4.7)
+#11 0.450 Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (24.2)
+#11 0.450 Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (0.12.1)
+#11 0.451 Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (11.1.0)
+#11 0.451 Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (4.57.0)
+#11 0.452 Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.9/site-packages (from matplotlib->vectorizer==0.1.0) (3.2.3)
+#11 0.501 Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.9/site-packages (from pandas->vectorizer==0.1.0) (2025.2)
+#11 0.502 Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.9/site-packages (from pandas->vectorizer==0.1.0) (2025.2)
+#11 0.504 Requirement already satisfied: narwhals>=1.15.1 in /usr/local/lib/python3.9/site-packages (from plotly->vectorizer==0.1.0) (1.34.1)
+#11 0.526 Requirement already satisfied: scipy>=1.6.0 in /usr/local/lib/python3.9/site-packages (from scikit-learn->vectorizer==0.1.0) (1.13.1)
+#11 0.526 Requirement already satisfied: joblib>=1.2.0 in /usr/local/lib/python3.9/site-packages (from scikit-learn->vectorizer==0.1.0) (1.4.2)
+#11 0.527 Requirement already satisfied: threadpoolctl>=3.1.0 in /usr/local/lib/python3.9/site-packages (from scikit-learn->vectorizer==0.1.0) (3.6.0)
+#11 0.541 Requirement already satisfied: pynndescent>=0.5 in /usr/local/lib/python3.9/site-packages (from umap-learn->vectorizer==0.1.0) (0.5.13)
+#11 0.541 Requirement already satisfied: tqdm in /usr/local/lib/python3.9/site-packages (from umap-learn->vectorizer==0.1.0) (4.67.1)
+#11 0.542 Requirement already satisfied: numba>=0.51.2 in /usr/local/lib/python3.9/site-packages (from umap-learn->vectorizer==0.1.0) (0.60.0)
+#11 0.579 Requirement already satisfied: zipp>=3.1.0 in /usr/local/lib/python3.9/site-packages (from importlib-resources>=3.2.0->matplotlib->vectorizer==0.1.0) (3.21.0)
+#11 0.588 Requirement already satisfied: llvmlite<0.44,>=0.43.0dev0 in /usr/local/lib/python3.9/site-packages (from numba>=0.51.2->umap-learn->vectorizer==0.1.0) (0.43.0)
+#11 0.606 Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.9/site-packages (from python-dateutil>=2.7->matplotlib->vectorizer==0.1.0) (1.17.0)
+#11 0.693 Installing collected packages: vectorizer
+#11 0.693   Running setup.py develop for vectorizer
+#11 0.996 Successfully installed vectorizer-0.1.0
+#11 0.996 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#11 1.196 
+#11 1.196 [notice] A new release of pip is available: 23.0.1 -> 25.0.1
+#11 1.196 [notice] To update, run: pip install --upgrade pip
+#11 DONE 1.3s
+
+#12 [8/8] RUN echo '#!/bin/bash\nLOG_DIR="/logs"\nmkdir -p "$LOG_DIR"\nTIMESTAMP=$(date +%Y%m%d_%H%M%S)\n\nif [ "$1" = "analyze" ]; then\n  echo "Analyzing files in /data/input..."\n  python /app/py/analyze_filesystem.py 2>&1 | tee "$LOG_DIR/analyze_$TIMESTAMP.log"\nelif [ "$1" = "visualize" ]; then\n  echo "Visualizing results..."\n  python /app/py/visualize_results.py 2>&1 | tee "$LOG_DIR/visualize_$TIMESTAMP.log"\nelse\n  echo "Available commands:"\n  echo "  analyze - Analyze files in /data/input"\n  echo "  visualize - Visualize analysis results"\nfi' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
+#12 DONE 0.1s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 3.3s done
+#13 writing image sha256:e65508cfca414add2213460d72104200b515502119f519f494a3e145e57b689c done
+#13 naming to docker.io/library/vectorizer_diskvoyeur-viz done
+#13 DONE 3.3s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/tn0xec7chmayj3dlnb4h5fxun
+Recreating diskvoyeur_analyzer ... 
+
+ERROR: for diskvoyeur_analyzer  'ContainerConfig'
+
+ERROR: for diskvoyeur  'ContainerConfig'
+Traceback (most recent call last):
+  File "/opt/homebrew/bin/docker-compose", line 8, in <module>
+    sys.exit(main())
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/cli/main.py", line 81, in main
+    command_func()
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/cli/main.py", line 203, in perform_command
+    handler(command, command_options)
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/metrics/decorator.py", line 18, in wrapper
+    result = fn(*args, **kwargs)
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/cli/main.py", line 1186, in up
+    to_attach = up(False)
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/cli/main.py", line 1166, in up
+    return self.project.up(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/project.py", line 697, in up
+    results, errors = parallel.parallel_execute(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/parallel.py", line 108, in parallel_execute
+    raise error_to_reraise
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/parallel.py", line 206, in producer
+    result = func(obj)
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/project.py", line 679, in do
+    return service.execute_convergence_plan(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 579, in execute_convergence_plan
+    return self._execute_convergence_recreate(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 499, in _execute_convergence_recreate
+    containers, errors = parallel_execute(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/parallel.py", line 108, in parallel_execute
+    raise error_to_reraise
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/parallel.py", line 206, in producer
+    result = func(obj)
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 494, in recreate
+    return self.recreate_container(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 612, in recreate_container
+    new_container = self.create_container(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 330, in create_container
+    container_options = self._get_container_create_options(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 921, in _get_container_create_options
+    container_options, override_options = self._build_container_volume_options(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 960, in _build_container_volume_options
+    binds, affinity = merge_volume_bindings(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 1548, in merge_volume_bindings
+    old_volumes, old_mounts = get_container_data_volumes(
+  File "/opt/homebrew/lib/python3.9/site-packages/compose/service.py", line 1579, in get_container_data_volumes
+    container.image_config['ContainerConfig'].get('Volumes') or {}
+KeyError: 'ContainerConfig'
+[0;32m[SUCCESS][0m Visualizations generated successfully!
+[0;32m[SUCCESS][0m Analysis complete!
+[0;34m[INFO][0m Results are available in ./data/output
+[0;34m[INFO][0m Logs are available in ./logs
+[0;34m[INFO][0m Open ./data/output/index.html in a web browser to view the visualizations
+[0;34m[INFO][0m Cleaning up...
