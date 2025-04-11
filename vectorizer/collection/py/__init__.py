@@ -1,11 +1,3 @@
 """
-DISKVOYEUR Collection Module
-
-This module provides tools for collecting filesystem data.
+DISKVOYEUR Collection Python Module
 """
-
-from .binary_storage import store_as_binary
-
-__all__ = [
-    'store_as_binary',
-]

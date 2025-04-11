@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-04-11T18:11:35.743327",
+  "stats": {
+    "total_files": 10,
+    "total_size": 82075.0,
+    "anomaly_count": 1,
+    "duplicate_groups": 3,
+    "cluster_count": 5
+  },
+  "anomalies": [
+    "/data/input/.hidden_file"
+  ],
+  "duplicate_groups": [
+    [
+      "/data/input/mcp_file_collector.js",
+      "/data/input/mcp_batch_processor.sh"
+    ],
+    [
+      "/data/input/example_setup.sh",
+      "/data/input/mcp_collector.py"
+    ],
+    [
+      "/data/input/directory_tree_reader.js",
+      "/data/input/mcp_directory_scanner.sh"
+    ]
+  ],
+  "clusters": {
+    "0": [
+      "/data/input/mcp_file_collector.js",
+      "/data/input/mcp_batch_processor.sh"
+    ],
+    "2": [
+      "/data/input/README.md"
+    ],
+    "3": [
+      "/data/input/example_setup.sh",
+      "/data/input/tar_parser.js",
+      "/data/input/example_usage.sh",
+      "/data/input/mcp_collector.py"
+    ],
+    "1": [
+      "/data/input/.hidden_file"
+    ],
+    "4": [
+      "/data/input/directory_tree_reader.js",
+      "/data/input/mcp_directory_scanner.sh"
+    ]
+  }
+}

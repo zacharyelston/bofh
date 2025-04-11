@@ -8,26 +8,48 @@ def extract_path_features(path):
     - path: File path to analyze
     
     Returns:
-    - Dictionary of path-based features
+    - Dictionary of path-based features (numeric values only)
     """
     features = {}
     
     # Directory depth
-    features['depth'] = path.count('/')
+    features['depth'] = float(path.count('/'))
     
     # Filename length
     filename = os.path.basename(path)
-    features['filename_length'] = len(filename)
+    features['filename_length'] = float(len(filename))
     
     # Extension
     _, ext = os.path.splitext(filename)
-    features['has_extension'] = 1 if ext else 0
+    features['has_extension'] = float(1 if ext else 0)
     
     # Hidden file
-    features['is_hidden'] = 1 if filename.startswith('.') else 0
+    features['is_hidden'] = float(1 if filename.startswith('.') else 0)
     
-    # Path embedding using TF-IDF
-    path_parts = path.split('/')
-    features['path_parts'] = ' '.join(path_parts)
+    # Extension length
+    features['extension_length'] = float(len(ext))
     
+    # Path length
+    features['path_length'] = float(len(path))
+    
+    # Directory name length (parent directory)
+    dirname = os.path.dirname(path)
+    if dirname:
+        features['dirname_length'] = float(len(os.path.basename(dirname)))
+    else:
+        features['dirname_length'] = 0.0
+    
+    # Number of dots in filename
+    features['dot_count'] = float(filename.count('.'))
+    
+    # Number of underscores in filename
+    features['underscore_count'] = float(filename.count('_'))
+    
+    # Number of hyphens in filename
+    features['hyphen_count'] = float(filename.count('-'))
+    
+    # Number of numbers in filename
+    features['number_count'] = float(sum(c.isdigit() for c in filename))
+    
+    # All features are numeric
     return features

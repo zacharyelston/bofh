@@ -1,3 +1,0 @@
-This is an example file for the DISKVOYEUR demonstration.
-It contains normal text content that should be analyzed as a regular file.
-Nothing unusual here, just a standard text file.

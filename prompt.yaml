@@ -1,0 +1,274 @@
+title: "ModelContextProtocol (MCP) for BOFH - MVP"
+
+introduction: "This document outlines the basic commands for interacting with the BOFH toolkit through the ModelContextProtocol. The BOFH (Bastard Operator From Hell) toolkit provides utilities for system administration, file manipulation, and Docker operations."
+
+required_tools:
+  desktop_commander:
+    - name: "read_file"
+      description: "Read the contents of a file from the file system"
+      usage: "Used to examine configuration files and data"
+    - name: "write_file"
+      description: "Write content to a file on the file system"
+      usage: "Used to create or update configuration files and scripts"
+    - name: "list_directory"
+      description: "Get a listing of files and directories"
+      usage: "Used to explore directory structures"
+    - name: "create_directory"
+      description: "Create a new directory"
+      usage: "Used to set up directory structures for projects"
+    - name: "execute_command"
+      description: "Execute a single shell command with arguments"
+      usage: "Used for simple command execution"
+    - name: "execute_full_command"
+      description: "Execute a complete shell command string"
+      usage: "Used for complex commands with pipes, redirections, etc."
+  docker_management:
+    - name: "docker-compose"
+      description: "Docker Compose for multi-container applications"
+      usage: "Used to define and run multi-container Docker applications"
+    - name: "dockerd"
+      description: "Docker daemon"
+      usage: "Core Docker service that manages containers"
+    - name: "docker-desktop"
+      description: "Docker Desktop application"
+      usage: "GUI for managing Docker resources and settings"
+  development_tools:
+    - name: "git"
+      description: "Git version control system"
+      usage: "Used for source code management"
+    - name: "python"
+      description: "Python interpreter"
+      usage: "Used for running Python scripts and applications"
+    - name: "pip"
+      description: "Python package installer"
+      usage: "Used for installing Python dependencies"
+
+mcp_command_structure:
+  format: |
+    [MCP]
+    Command: bofh.<module>.<action>
+    Parameters:
+      <parameter1>: <value1>
+      <parameter2>: <value2>
+    [/MCP]
+
+basic_command_examples:
+  filesystem:
+    analyze_directory:
+      command: "bofh.filesystem.analyze"
+      parameters:
+        directory: "/path/to/target"
+        output: "/path/to/output"
+    create_archive:
+      command: "bofh.filesystem.archive"
+      parameters:
+        source: "/path/to/source"
+        destination: "/path/to/archive.tar"
+        compression: "gzip"
+  docker:
+    visualize_data:
+      command: "bofh.docker.visualize"
+      parameters:
+        inputData: "/path/to/data"
+        outputDir: "/path/to/output"
+    run_analysis:
+      command: "bofh.docker.analyze"
+      parameters:
+        inputDir: "/path/to/input"
+        outputDir: "/path/to/output"
+        logDir: "/path/to/logs"
+
+available_mcp_tools:
+  filesystem_management:
+    - name: "bofh.filesystem.analyze"
+      description: "Analyze directory structure"
+    - name: "bofh.filesystem.archive"
+      description: "Create archive of files"
+    - name: "bofh.filesystem.find"
+      description: "Find files by pattern"
+    - name: "bofh.filesystem.copy"
+      description: "Copy files or directories"
+  docker_management:
+    - name: "bofh.docker.build"
+      description: "Build Docker images"
+    - name: "bofh.docker.run"
+      description: "Run Docker containers"
+    - name: "bofh.docker.analyze"
+      description: "Run analysis containers"
+    - name: "bofh.docker.visualize"
+      description: "Run visualization containers"
+  system_tools:
+    - name: "execute_command"
+      description: "Execute a whitelisted shell command"
+    - name: "get_whitelist"
+      description: "Retrieve the list of whitelisted commands"
+    - name: "add_to_whitelist"
+      description: "Add a command to the whitelist"
+    - name: "update_security_level"
+      description: "Update a command's security level"
+    - name: "remove_from_whitelist"
+      description: "Remove a command from the whitelist"
+    - name: "get_pending_commands"
+      description: "List commands pending approval"
+    - name: "approve_command"
+      description: "Approve a pending command"
+    - name: "deny_command"
+      description: "Deny a pending command"
+
+command_whitelist:
+  description: "For security purposes, the MCP server implements a command whitelist system."
+  required_whitelist_entries:
+    basic_system_commands:
+      - command: "ls"
+        description: "List directory contents"
+      - command: "pwd"
+        description: "Print working directory"
+      - command: "echo"
+        description: "Print text to standard output"
+      - command: "cat"
+        description: "Concatenate and print files"
+      - command: "cd"
+        description: "Change directory"
+    file_manipulation_commands:
+      - command: "mkdir -p"
+        description: "Create directories with parent directories"
+      - command: "cp -r"
+        description: "Copy directories recursively"
+      - command: "touch"
+        description: "Create empty files"
+      - command: "mv"
+        description: "Move files and directories"
+    git_commands:
+      - command: "git init"
+        description: "Initialize git repository"
+      - command: "git add"
+        description: "Add files to git staging"
+      - command: "git commit"
+        description: "Commit changes to git"
+      - command: "git push"
+        description: "Push changes to remote repository"
+      - command: "git pull"
+        description: "Pull changes from remote repository"
+      - command: "git clone"
+        description: "Clone a repository"
+      - command: "git checkout"
+        description: "Switch branches"
+      - command: "git branch"
+        description: "List or create branches"
+    nodejs_commands:
+      - command: "npm install"
+        description: "Install Node.js dependencies"
+      - command: "npm start"
+        description: "Start the application"
+      - command: "npm run build"
+        description: "Build the application"
+      - command: "node"
+        description: "Execute Node.js code"
+    docker_commands:
+      - command: "docker-compose up"
+        description: "Start Docker containers"
+      - command: "docker-compose down"
+        description: "Stop Docker containers"
+      - command: "docker build"
+        description: "Build Docker images"
+      - command: "docker run"
+        description: "Run Docker containers"
+      - command: "docker ps"
+        description: "List running containers"
+      - command: "docker rm"
+        description: "Remove containers"
+      - command: "docker rmi"
+        description: "Remove images"
+      - command: "docker stop"
+        description: "Stop containers"
+      - command: "docker network"
+        description: "Manage Docker networks"
+      - command: "docker volume"
+        description: "Manage Docker volumes"
+    utility_commands:
+      - command: "curl"
+        description: "Transfer data with URLs"
+      - command: "grep"
+        description: "Search for patterns in files"
+      - command: "find"
+        description: "Search for files"
+      - command: "tar"
+        description: "Create tar archives"
+      - command: "gzip"
+        description: "Compress files"
+      - command: "awk"
+        description: "Pattern scanning and processing language"
+      - command: "sed"
+        description: "Stream editor for filtering/transforming text"
+  
+  security_levels:
+    - level: "safe"
+      description: "Commands that are safe to execute without additional review"
+    - level: "requires_approval"
+      description: "Commands that require review before execution"
+    - level: "forbidden"
+      description: "Commands that should never be executed"
+  
+  example_whitelist_addition:
+    command: "add_to_whitelist"
+    parameters:
+      command: "mkdir -p"
+      description: "Create directories with parent directories as needed"
+      securityLevel: "safe"
+
+execute_command_tool:
+  description: "The execute_command tool allows you to run whitelisted shell commands"
+  simple_example:
+    command: "execute_command"
+    parameters:
+      command: "ls"
+      args: 
+        - "-la"
+        - "/path/to/directory"
+  complex_example:
+    command: "execute_full_command"
+    parameters:
+      command: "find /path/to/directory -name '*.tar' -type f"
+
+best_practices:
+  - name: "Work on One Task at a Time"
+    description: "Complete and validate each task before moving to the next"
+  - name: "Validate Results"
+    description: "Always check that operations completed successfully"
+  - name: "Clean Up Resources"
+    description: "Remove temporary files and Docker resources when done"
+  - name: "Command Safety"
+    description: "Use safe commands when possible, and request approval for potentially dangerous operations"
+  - name: "Error Handling"
+    description: "Properly handle and report errors in executed commands"
+  - name: "Careful Cleanup"
+    description: "Be careful when using commands that can remove files or Docker resources"
+
+mcp_best_practices:
+  - name: "MCP stands for ModelContextProtocol"
+    description: "Always remember what MCP means"
+  - name: "Work Methodically"
+    description: "Focus on one task at a time and validate before moving on"
+  - name: "Ask Before New Tasks"
+    description: "Always ask if a new task is needed before starting it"
+  - name: "Show Your Work"
+    description: "Demonstrate careful execution by showing the validation of each step"
+  - name: "Slower Execution is Better"
+    description: "Taking time to be careful is better than making mistakes"
+
+error_handling:
+  description: "The BOFH toolkit will return error messages for invalid operations or command failures. Always check for errors after executing commands and provide meaningful error information."
+
+security_considerations:
+  - name: "Directory Access"
+    description: "Be careful when accessing system directories"
+  - name: "Command Whitelisting"
+    description: "Only use whitelisted commands for security"
+  - name: "Docker Safety"
+    description: "Be careful when managing Docker resources to avoid disrupting the system"
+  - name: "Cleanup Operations"
+    description: "Be extra careful with cleanup operations that remove files or resources"
+  - name: "Temporary Files"
+    description: "Properly manage temporary files and directories"
+  - name: "Permissions"
+    description: "The BOFH toolkit operates with the permissions of the executing user, so be careful when executing commands that could modify system resources"

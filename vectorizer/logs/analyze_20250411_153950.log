@@ -1,0 +1,30 @@
+DISKVOYEUR Analysis
+==================
+Collecting files from /data/input...
+Found 10 files
+Extracting features...
+Extracted features for 10 files
+Analyzing data...
+Detecting anomalies...
+Traceback (most recent call last):
+  File "/app/py/analyze_filesystem.py", line 350, in <module>
+    main()
+  File "/app/py/analyze_filesystem.py", line 334, in main
+    results = analyze_data(feature_data, metadata)
+  File "/app/py/analyze_filesystem.py", line 103, in analyze_data
+    anomalies = detect_anomalies(vector_data, method='isolation_forest', contamination=0.05)
+  File "/app/analysis/py/anomaly_detection.py", line 31, in detect_anomalies
+    labels = detector.fit_predict(vectors)
+  File "/usr/local/lib/python3.9/site-packages/sklearn/base.py", line 1146, in fit_predict
+    return self.fit(X, **kwargs).predict(X)
+  File "/usr/local/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/sklearn/ensemble/_iforest.py", line 317, in fit
+    X = validate_data(
+  File "/usr/local/lib/python3.9/site-packages/sklearn/utils/validation.py", line 2944, in validate_data
+    out = check_array(X, input_name="X", **check_params)
+  File "/usr/local/lib/python3.9/site-packages/sklearn/utils/validation.py", line 1055, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+  File "/usr/local/lib/python3.9/site-packages/sklearn/utils/_array_api.py", line 839, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: ' data input mcp_file_collector.js'

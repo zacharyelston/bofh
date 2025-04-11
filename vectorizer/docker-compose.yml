@@ -8,9 +8,14 @@ services:
     volumes:
       - ./data/input:/data/input
       - ./data/output:/data/output
+      - ./logs:/logs
     command: analyze
     environment:
       - PYTHONPATH=/app
+    networks:
+      - diskvoyeur-network
+    restart: "no"
+    container_name: diskvoyeur_analyzer
 
   diskvoyeur-viz:
     build:
@@ -19,8 +24,17 @@ services:
     volumes:
       - ./data/input:/data/input
       - ./data/output:/data/output
+      - ./logs:/logs
     command: visualize
     environment:
       - PYTHONPATH=/app
     depends_on:
       - diskvoyeur
+    networks:
+      - diskvoyeur-network
+    restart: "no"
+    container_name: diskvoyeur_visualizer
+
+networks:
+  diskvoyeur-network:
+    driver: bridge

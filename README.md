@@ -1,95 +1,137 @@
-# BOFH - Bastard Operator From Hell
-## Unix Sysadmin mcpServer
+# BOFH Toolkit
 
-BOFH is a Unix system administration tool that harnesses the power of traditional Unix toolchains in magical ways, embracing the spirit of the original Bastard Operator From Hell character - pragmatic, efficient, and occasionally terrifying in its capabilities.
+## Overview
 
-## Philosophy
+The BOFH (Bastard Operator From Hell) Toolkit is a collection of system administration and Docker management utilities designed to simplify common tasks like filesystem analysis, data visualization, and Docker container management.
 
-The BOFH tool operates on these core principles:
+## Key Features
 
-1. **Unix Philosophy**: Small, focused tools that do one thing well and can be chained together
-2. **ModelContextProtocol (MCP)**: Process and planning over implementation, with documentation and repeatability
-3. **Magical Toolchains**: Combining standard Unix tools in unexpected and powerful ways
-4. **Efficiency Over Elegance**: Getting the job done, sometimes in ways that make you question your sanity
+- **Filesystem Analysis**: Analyze directory structures and generate insights
+- **Data Visualization**: Create visual representations of analyzed data
+- **Docker Management**: Simplified Docker container and image management
+- **Archive Creation**: Create and manage archive files for backups and transfers
+- **ModelContextProtocol (MCP)**: Structured protocol for toolkit interaction
 
-## Example Use Cases
+## Components
 
-The BOFH toolset contains examples for various system administration tasks:
+The toolkit is organized into several key components:
 
-1. **Schema Searching** (`/schema_search_example/`): Tools for digging through codebases to find database schemas and table structures
-2. **Find2Tar Directory Tools** (`/find2tar/`): Advanced directory scanning and archive manipulation tools that extend standard Unix find/tar capabilities
-3. More examples to come as the toolset evolves
+- **vectorizer**: Analyzes and visualizes directory structures
+- **find2tar**: Extracts and archives specific files and directories
+- **schema_search_example**: Sample implementation for searching file schemas
+- **bofh.sh**: Main entry point script for the toolkit
 
-## Tool Highlights
+## Requirements
 
-### Schema Search
+### System Requirements
 
-A collection of tools for finding and analyzing database schemas in codebases. Includes scripts for:
-- Identifying schema definitions in SQL files
-- Mapping relationships between tables
-- Finding SQL patterns in non-SQL files
-- Generating comprehensive documentation of database structures
+- macOS (tested on latest version)
+- Docker Desktop
+- Python 3.9+
+- Git
 
-### Find2Tar Directory Tools
+### Python Dependencies
 
-A powerful extension of standard Unix utilities for efficient file system operations:
-- **mcp_directory_scanner.sh**: Advanced directory scanner with JSON output and statistics
-- **tar_parser.js**: Flexible TAR archive manipulation tool
-- **directory_tree_reader.js**: Fast directory structure analyzer
-- **mcp_batch_processor.sh**: Process files in batches across directories
-- **mcp_collector.py**: Collect and organize files based on patterns
+- numpy
+- pandas
+- scikit-learn
+- matplotlib
+- seaborn
+- plotly
+- networkx
+- python-louvain
+- umap-learn
 
-## Potential Future Direction
+## Installation
 
-The relationship between BOFH and AI LLMs may be symbiotic:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/bofh.git
+   cd bofh
+   ```
 
-1. **BOFH → LLM**: BOFH can generate structured data and initial analyses that LLMs can then interpret and expand upon
-2. **LLM → BOFH**: LLMs can generate BOFH-style scripts and approaches tailored to specific problems
-3. **Hybrid Operations**: Tasks that require both raw Unix power and natural language understanding
+2. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Usage Patterns
+3. Ensure Docker Desktop is running:
+   ```bash
+   docker info
+   ```
 
-BOFH tools typically follow these patterns:
+## Usage
 
-1. Execute a search or analysis operation (using grep, awk, sed, find, etc.)
-2. Generate structured output (JSON, CSV, or markdown reports)
-3. Provide tools for further analysis or processing of that output
-4. Document the approach for repeatability and adaptation
-
-## Getting Started
-
-Browse the example directories to see BOFH in action. Each example contains:
-
-- README explaining the purpose and approach
-- Command-line tools (typically shell scripts and occasionally Python/JavaScript)
-- Sample outputs or expected results
-- Documentation on when and how to use the tools
-
-### Quick Start with Find2Tar
+### Analyze a Directory
 
 ```bash
-# Scan a directory and generate statistics
-./find2tar/mcp_directory_scanner.sh --stats /path/to/directory
-
-# Process a tar archive
-./find2tar/mcp_directory_scanner.sh /path/to/archive.tar.gz
-
-# Extract specific files from an archive
-./find2tar/mcp_directory_scanner.sh --extract=.txt /path/to/archive.tar.gz
-
-# Generate JSON output for further processing
-./find2tar/mcp_directory_scanner.sh --json /path/to/directory
+./vectorizer/analyze-directory.sh /path/to/directory
 ```
 
-## Configuration
+### Create an Archive from Search Results
 
-Most BOFH tools can be configured via:
-1. The global configuration file (`config.sh`)
-2. Command-line arguments
-3. Environment variables
+```bash
+./find2tar/find2tar.sh /path/to/search -name "*.txt" -o output.tar.gz
+```
 
-## Warning
+### Run a Schema Search
 
-In the true spirit of BOFH, these tools are powerful and should be wielded with caution. Always review scripts before executing them, especially if they modify system files or databases.
+```bash
+./schema_search_example/search_schema.sh /path/to/data pattern
+```
 
-Remember: With great power comes absolutely no responsibility whatsoever.
+### Using the MCP Interface
+
+The toolkit implements the ModelContextProtocol (MCP) for structured interaction:
+
+```
+[MCP]
+Command: bofh.filesystem.analyze
+Parameters:
+  directory: /path/to/target
+  output: /path/to/output
+[/MCP]
+```
+
+See `prompt.yaml` for detailed MCP documentation.
+
+## Directory Structure
+
+```
+bofh/
+├── bofh.sh                # Main entry script
+├── config.sh              # Global configuration
+├── prompt.yaml            # MCP documentation
+├── vectorizer/            # Directory analysis and visualization
+├── find2tar/              # File search and archive utilities
+└── schema_search_example/ # Schema search examples
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+./run_tests.sh
+```
+
+## Troubleshooting
+
+Common issues:
+
+1. **Docker not running**: Ensure Docker Desktop is started
+2. **Permission denied**: Run with appropriate permissions 
+3. **ContainerConfig error**: Clean Docker resources with `./reset-docker.sh`
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

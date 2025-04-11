@@ -1,2 +1,0 @@
-This file is in a nested directory structure.
-It should be detected as part of a different cluster than the root-level files.
