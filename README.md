@@ -46,7 +46,7 @@ The toolkit is organized into several key components:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/bofh.git
+   git clone https://github.com/AlZacAI/bofh.git
    cd bofh
    ```
 

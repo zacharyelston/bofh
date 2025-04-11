@@ -142,14 +142,6 @@ scatter_plot(coords, title='File Vector Space', output_file='vector_space.png')
 
 ## Installation
 
-No installation is required - just clone the repository and make the shell scripts executable:
-
-```bash
-git clone https://github.com/yourusername/diskvoyeur.git
-cd diskvoyeur
-chmod +x */*.sh
-```
-
 Dependencies:
 - Python 3.6+
 - NumPy, Pandas
