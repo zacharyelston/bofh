@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  diskvoyeur:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data/input:/data/input
+      - ./data/output:/data/output
+    command: analyze
+    environment:
+      - PYTHONPATH=/app
+
+  diskvoyeur-viz:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data/input:/data/input
+      - ./data/output:/data/output
+    command: visualize
+    environment:
+      - PYTHONPATH=/app
+    depends_on:
+      - diskvoyeur
