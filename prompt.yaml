@@ -145,8 +145,6 @@ command_whitelist:
         description: "Add files to git staging"
       - command: "git commit"
         description: "Commit changes to git"
-      - command: "git push"
-        description: "Push changes to remote repository"
       - command: "git pull"
         description: "Pull changes from remote repository"
       - command: "git clone"
