@@ -1,0 +1,85 @@
+# YAML Tree Catalogger
+
+A tool to search for YAML trees in filesystem structures and build summaries of connections, particularly focused on Kubernetes/Kustomize applications.
+
+## Features
+
+- Recursively search directories matching a pattern (default: `*-atlas`)
+- Find and parse YAML files to extract key information
+- Extract service names and application titles
+- Identify Kustomize resources and their relationships
+- Generate summary of connections
+- Export results to JSON for further processing
+- Export relationships as GraphViz DOT files for visualization
+
+## Installation
+
+This tool requires Python 3.6+ and the following dependencies:
+- PyYAML
+
+You can install the required dependencies with:
+
+```bash
+pip install pyyaml
+```
+
+## Usage
+
+Basic usage:
+
+```bash
+python yaml_tree_catalogger.py /path/to/search
+```
+
+Search multiple paths:
+
+```bash
+python yaml_tree_catalogger.py /path/to/search1 /path/to/search2
+```
+
+Specify a different directory pattern:
+
+```bash
+python yaml_tree_catalogger.py /path/to/search --pattern "*-kustomize"
+```
+
+Export results to JSON:
+
+```bash
+python yaml_tree_catalogger.py /path/to/search --output catalog.json
+```
+
+Export relationships as GraphViz DOT file:
+
+```bash
+python yaml_tree_catalogger.py /path/to/search --graph relationships.dot
+```
+
+Generate a visual diagram from the DOT file:
+
+```bash
+dot -Tpng -o relationships.png relationships.dot
+```
+
+## Example
+
+For the structure at `$SOURCE_DIR/$SOURCE_DIR`:
+
+```bash
+python yaml_tree_catalogger.py $SOURCE_DIR/$SOURCE_DIR
+```
+
+This will find all directories with `-atlas` in their names, parse YAML files within them, and output a summary of services and their relationships.
+
+## Extending
+
+The tool can be extended by:
+
+1. Adding support for more YAML field patterns
+2. Enhancing visualization options
+3. Implementing database storage for querying
+4. Adding support for specific Kubernetes resource types
+
+## References
+
+This tool was inspired by the reference at `/Users/zacelston/AlZacAI/bofh/prompt.yaml`.

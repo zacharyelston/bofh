@@ -1,0 +1,245 @@
+#!/bin/bash
+# MCP YAML Query
+# Tool to query YAML files with SQL-like syntax
+# Following ModelContextProtocol (MCP) pattern
+
+# Set default values
+DIRECTORY=""
+FILE=""
+PATTERN="*"
+QUERY=""
+OUTPUT=""
+FORMAT="text"
+VERBOSE=0
+
+# Parse MCP command
+parse_mcp_command() {
+    echo "Parsing MCP command..."
+    
+    # Extract command parameters
+    if [[ "$1" =~ directory:\ *(.*) ]]; then
+        DIRECTORY="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ file:\ *(.*) ]]; then
+        FILE="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ pattern:\ *(.*) ]]; then
+        PATTERN="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ query:\ *(.*) ]]; then
+        QUERY="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ output:\ *(.*) ]]; then
+        OUTPUT="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ format:\ *(.*) ]]; then
+        FORMAT="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ verbose:\ *(.*) ]]; then
+        VERBOSE=1
+    fi
+    
+    # Validate required parameters
+    if [ -z "$QUERY" ]; then
+        echo "Error: Missing required parameter 'query'"
+        exit 1
+    fi
+    
+    if [ -z "$DIRECTORY" ] && [ -z "$FILE" ]; then
+        echo "Error: Either 'directory' or 'file' parameter must be provided"
+        exit 1
+    fi
+}
+
+# Validate input parameters
+validate_inputs() {
+    echo "Validating inputs..."
+    
+    # Check if directory or file exists
+    if [ -n "$DIRECTORY" ] && [ ! -d "$DIRECTORY" ]; then
+        echo "Error: Directory '$DIRECTORY' does not exist"
+        exit 1
+    fi
+    
+    if [ -n "$FILE" ] && [ ! -f "$FILE" ]; then
+        echo "Error: File '$FILE' does not exist"
+        exit 1
+    fi
+    
+    # Create output directory if needed
+    if [ -n "$OUTPUT" ]; then
+        mkdir -p "$(dirname "$OUTPUT")"
+    fi
+}
+
+# Run the YAML query engine
+run_query_engine() {
+    echo "Running YAML query engine..."
+    echo "- Query: $QUERY"
+    
+    if [ -n "$DIRECTORY" ]; then
+        echo "- Directory: $DIRECTORY"
+        echo "- Pattern: $PATTERN"
+    fi
+    
+    if [ -n "$FILE" ]; then
+        echo "- File: $FILE"
+    fi
+    
+    if [ -n "$OUTPUT" ]; then
+        echo "- Output: $OUTPUT"
+        echo "- Format: $FORMAT"
+    fi
+    
+    # Prepare command arguments
+    cmd_args=""
+    
+    if [ -n "$DIRECTORY" ]; then
+        cmd_args="$cmd_args --dir \"$DIRECTORY\""
+    fi
+    
+    if [ -n "$FILE" ]; then
+        cmd_args="$cmd_args --file \"$FILE\""
+    fi
+    
+    if [ -n "$PATTERN" ]; then
+        cmd_args="$cmd_args --pattern \"$PATTERN\""
+    fi
+    
+    cmd_args="$cmd_args --query \"$QUERY\""
+    
+    if [ -n "$OUTPUT" ]; then
+        cmd_args="$cmd_args --output \"$OUTPUT\""
+    fi
+    
+    if [ -n "$FORMAT" ]; then
+        cmd_args="$cmd_args --format \"$FORMAT\""
+    fi
+    
+    if [ "$VERBOSE" -eq 1 ]; then
+        cmd_args="$cmd_args --verbose"
+    fi
+    
+    # Run the Python script
+    eval "python \"$(dirname "$0")/yaml_query_engine.py\" $cmd_args"
+    
+    # Check if the command was successful
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to execute YAML query"
+        exit 1
+    fi
+    
+    echo "Query execution completed"
+    
+    if [ -n "$OUTPUT" ]; then
+        echo "Results saved to: $OUTPUT"
+    fi
+}
+
+# Display MCP usage
+display_usage() {
+    cat << EOF
+[MCP]
+Command: bofh.filesystem.yaml_query
+Parameters:
+  directory: /path/to/yaml/files (required if file not provided)
+  file: /path/to/single.yaml (required if directory not provided)
+  pattern: *.yaml (optional, default: *)
+  query: "select KeyB from KeyB when KeyA is ValueA" (required)
+  output: /path/to/output.json (optional)
+  format: json|yaml|text (optional, default: text)
+  verbose: true (optional)
+[/MCP]
+
+Description:
+  Query YAML files using SQL-like syntax to extract specific key-value relationships.
+
+Example:
+[MCP]
+Command: bofh.filesystem.yaml_query
+Parameters:
+  directory: $SOURCE_DIR/$SOURCE_DIR
+  query: "select name from metadata when kind is Deployment and report name:name kind:kind"
+  output: /Users/zacelston/AlZacAI/bofh/output/deployments.json
+  format: json
+[/MCP]
+EOF
+}
+
+# Main function
+main() {
+    # Check if we're being asked for usage
+    if [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+        display_usage
+        exit 0
+    fi
+    
+    # Check if we have an MCP command
+    if [[ "$1" =~ ^\[MCP\] ]]; then
+        parse_mcp_command "$1"
+    else
+        # Assume direct command line arguments
+        while [ $# -gt 0 ]; do
+            case "$1" in
+                --dir=*)
+                    DIRECTORY="${1#*=}"
+                    ;;
+                --file=*)
+                    FILE="${1#*=}"
+                    ;;
+                --pattern=*)
+                    PATTERN="${1#*=}"
+                    ;;
+                --query=*)
+                    QUERY="${1#*=}"
+                    ;;
+                --output=*)
+                    OUTPUT="${1#*=}"
+                    ;;
+                --format=*)
+                    FORMAT="${1#*=}"
+                    ;;
+                --verbose)
+                    VERBOSE=1
+                    ;;
+                *)
+                    echo "Unknown option: $1"
+                    display_usage
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+        
+        # Check required parameters
+        if [ -z "$QUERY" ]; then
+            echo "Error: Missing required parameter 'query'"
+            display_usage
+            exit 1
+        fi
+        
+        if [ -z "$DIRECTORY" ] && [ -z "$FILE" ]; then
+            echo "Error: Either 'directory' or 'file' parameter must be provided"
+            display_usage
+            exit 1
+        fi
+    fi
+    
+    # Validate inputs
+    validate_inputs
+    
+    # Run the query engine
+    run_query_engine
+}
+
+# Print MCP tool identification
+echo "MCP YAML Query - Following ModelContextProtocol (MCP)"
+
+# Execute main function
+main "$@"

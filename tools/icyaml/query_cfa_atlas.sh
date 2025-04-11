@@ -1,0 +1,150 @@
+#!/bin/bash
+# Script to query Kubernetes resources in YAML configuration files directories
+
+# Set the base path for the search
+BASE_PATH="$SOURCE_DIR/$SOURCE_DIR"
+
+# Set output paths
+OUTPUT_DIR="/Users/zacelston/AlZacAI/bofh/output"
+JSON_OUTPUT="${OUTPUT_DIR}/cfa_resources.json"
+
+# Create output directory if it doesn't exist
+mkdir -p "${OUTPUT_DIR}"
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+display_logo() {
+    echo -e "\033[1;36m"
+    echo "  _____  _______     __      _      __  __  _           ____                           "
+    echo " |_   _|/ ____\\ \\   / //\\   | |    |  \\/  || |         / __ \\                          "
+    echo "   | | | |     \\ \\_/ //  \\  | |    | \\  / || |        | |  | |_   _  ___ _ __ _   _    "
+    echo "   | | | |      \\   // /\\ \\ | |    | |\\/| || |        | |  | | | | |/ _ \\ '__| | | |   "
+    echo "  _| |_| |____   | |/ ____ \\| |____| |  | || |____    | |__| | |_| |  __/ |  | |_| |   "
+    echo " |_____|\\_____|  |_/_/    \\_\\______|_|  |_||______|    \\___\\_\\\\__,_|\\___|_|   \\__, |   "
+    echo "                                                                               __/ |   "
+    echo "                                                                              |___/    "
+    echo -e "\033[0m"
+    echo "  \"I see the relationships between YAML nodes...\""
+    echo ""
+}
+
+display_usage() {
+    echo "Usage: query_cfa_atlas.sh [query_type]"
+    echo ""
+    echo "Query Types:"
+    echo "  deployments     Find all deployments and their metadata"
+    echo "  services        Find all services and their metadata"
+    echo "  configmaps      Find all configmaps and their metadata"
+    echo "  resources       Find all Kubernetes resources and their types"
+    echo "  images          Find all container images and their deployment contexts"
+    echo "  namespaces      Find all namespace definitions"
+    echo "  connections     Find service-to-deployment connections"
+    echo "  custom \"query\"  Execute a custom query (enclose in quotes)"
+    echo ""
+    echo "Examples:"
+    echo "  ./query_cfa_atlas.sh deployments"
+    echo "  ./query_cfa_atlas.sh images"
+    echo "  ./query_cfa_atlas.sh custom \"select image from spec when kind is Deployment\""
+    echo ""
+}
+
+run_query() {
+    local query_type="$1"
+    local custom_query="$2"
+    local output_file="${3:-$JSON_OUTPUT}"
+    
+    case "$query_type" in
+        deployments)
+            query="select name from metadata when kind is Deployment and report name:name kind:kind"
+            output_file="${OUTPUT_DIR}/cfa_deployments.json"
+            ;;
+        services)
+            query="select name from metadata when kind is Service and report name:name kind:kind"
+            output_file="${OUTPUT_DIR}/cfa_services.json"
+            ;;
+        configmaps)
+            query="select name from metadata when kind is ConfigMap and report name:name kind:kind"
+            output_file="${OUTPUT_DIR}/cfa_configmaps.json"
+            ;;
+        resources)
+            query="select kind from kind node when metadata is metadata and report kind:kind"
+            output_file="${OUTPUT_DIR}/cfa_resources.json"
+            ;;
+        images)
+            query="select image from image node when spec is spec and report image:image"
+            output_file="${OUTPUT_DIR}/cfa_images.json"
+            ;;
+        namespaces)
+            query="select name from metadata when kind is Namespace and report name:name"
+            output_file="${OUTPUT_DIR}/cfa_namespaces.json"
+            ;;
+        connections)
+            query="select app from selector when metadata is metadata and report app:app"
+            output_file="${OUTPUT_DIR}/cfa_connections.json"
+            ;;
+        custom)
+            if [ -z "$custom_query" ]; then
+                echo "Error: Custom query is required when using 'custom' query type"
+                display_usage
+                exit 1
+            fi
+            query="$custom_query"
+            output_file="${OUTPUT_DIR}/cfa_custom_query.json"
+            ;;
+        *)
+            echo "Error: Unknown query type: $query_type"
+            display_usage
+            exit 1
+            ;;
+    esac
+    
+    echo "Running query: $query"
+    echo "Output file: $output_file"
+    
+    # Run the query engine
+    python "${SCRIPT_DIR}/yaml_query_engine.py" \
+        --dir "${BASE_PATH}" \
+        --pattern "*" \
+        --query "${query}" \
+        --output "${output_file}" \
+        --format json
+    
+    # Check if the command was successful
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to execute YAML query"
+        exit 1
+    fi
+    
+    echo "Query execution completed"
+    echo "Results saved to: $output_file"
+    
+    # Display a sample of the results
+    echo ""
+    echo "Sample results:"
+    echo "---------------"
+    head -n 20 "$output_file"
+    echo "..."
+}
+
+# Main function
+main() {
+    # Display the logo
+    display_logo
+    
+    # Check if we have arguments
+    if [ $# -eq 0 ]; then
+        display_usage
+        exit 0
+    fi
+    
+    # Parse arguments
+    query_type="$1"
+    custom_query="$2"
+    
+    # Run the query
+    run_query "$query_type" "$custom_query"
+}
+
+# Execute main function
+main "$@"
