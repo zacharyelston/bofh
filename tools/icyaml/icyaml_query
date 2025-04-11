@@ -1,0 +1,82 @@
+#!/bin/bash
+# ICYAML Query - SQL-like YAML query tool
+# Part of the ICYAML ("I See YAML") suite
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Display the ASCII art logo
+display_logo() {
+    echo -e "\033[1;36m"
+    echo "  _____  _______     __      _      __  __  _           ____                           "
+    echo " |_   _|/ ____\\ \\   / //\\   | |    |  \\/  || |         / __ \\                          "
+    echo "   | | | |     \\ \\_/ //  \\  | |    | \\  / || |        | |  | |_   _  ___ _ __ _   _    "
+    echo "   | | | |      \\   // /\\ \\ | |    | |\\/| || |        | |  | | | | |/ _ \\ '__| | | |   "
+    echo "  _| |_| |____   | |/ ____ \\| |____| |  | || |____    | |__| | |_| |  __/ |  | |_| |   "
+    echo " |_____|\\_____|  |_/_/    \\_\\______|_|  |_||______|    \\___\\_\\\\__,_|\\___|_|   \\__, |   "
+    echo "                                                                               __/ |   "
+    echo "                                                                              |___/    "
+    echo -e "\033[0m"
+    echo "  \"I see the relationships between YAML nodes...\""
+    echo ""
+}
+
+# Display the usage information
+display_usage() {
+    echo "Usage: icyaml_query [options]"
+    echo ""
+    echo "Options:"
+    echo "  --dir, -d         Directory containing YAML files"
+    echo "  --file, -f        Single YAML file to query"
+    echo "  --pattern, -p     File pattern to match (default: *)"
+    echo "  --query, -q       SQL-like query to execute"
+    echo "  --output, -o      Output file for results"
+    echo "  --format          Output format (json, yaml, text)"
+    echo "  --verbose, -v     Enable verbose output"
+    echo "  --help, -h        Display this help message"
+    echo ""
+    echo "Query Examples:"
+    echo "  \"select ValueB from keyB node when parent KeyA is ValueA and report KeyB:ValueB KeyA:ValueA\""
+    echo "  \"select name from metadata node when kind is Deployment and report name:name kind:kind\""
+    echo "  \"select image from spec when name is deployment and report image:image name:name\""
+    echo ""
+    echo "Example Commands:"
+    echo "  icyaml_query -d /path/to/k8s -q \"select name from metadata when kind is Deployment\""
+    echo "  icyaml_query -f config.yaml -q \"select port from spec when name is web\" -o results.json --format json"
+    echo ""
+}
+
+# Check if Python is available
+if ! command -v python3 &> /dev/null; then
+    echo "Error: Python 3 is required but not found. Please install Python 3 and try again."
+    exit 1
+fi
+
+# Run the query engine
+run_query_engine() {
+    python3 "${SCRIPT_DIR}/yaml_query_engine.py" "$@"
+}
+
+# Main function
+main() {
+    # Display the logo
+    display_logo
+    
+    # Check if we have arguments
+    if [ $# -eq 0 ]; then
+        display_usage
+        exit 0
+    fi
+    
+    # Check for help flag
+    if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+        display_usage
+        exit 0
+    fi
+    
+    # Run the query engine
+    run_query_engine "$@"
+}
+
+# Run the main function
+main "$@"

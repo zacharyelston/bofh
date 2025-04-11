@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  icyaml:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: icyaml:latest
+    container_name: icyaml
+    volumes:
+      - .:/app
+      - ${SOURCE_DIR:-$SOURCE_DIR}:/data/ENV
+      - ${OUTPUT_PATH:-../../../output}:/data/output
+    environment:
+      - SOURCE_DIR=${SOURCE_DIR:-$SOURCE_DIR}
+      - OUTPUT_PATH=${OUTPUT_PATH:-../../../output}
+    entrypoint: ["/bin/bash"]
+    # Default command can be overridden on the command line
+    command: ["-c", "echo 'ICYAML container ready. Use docker-compose run icyaml COMMAND to run specific commands.'"]

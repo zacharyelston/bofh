@@ -1,0 +1,89 @@
+# ICYAML for Apple Silicon (M1/M2/M3) Macs
+
+## Overview
+
+This guide explains how to use the ICYAML tools on Apple Silicon Macs, which require special handling for Docker compatibility.
+
+## Quick Start
+
+1. **Build the platform-aware Docker image**:
+   ```bash
+   chmod +x platform_docker.sh
+   ./platform_docker.sh test
+   ```
+
+2. **Analyze YAML configuration files for outliers**:
+   ```bash
+   chmod +x analyze_yaml_m1.sh
+   ./analyze_yaml_m1.sh
+   ```
+
+## Understanding the M1/M2/M3 Issue
+
+Apple Silicon Macs (M1, M2, M3) use the ARM64 architecture, which differs from the traditional x86_64 (Intel) architecture. This can cause compatibility issues with Docker containers that assume an x86_64 architecture.
+
+Our solution:
+1. Auto-detect Apple Silicon and configure Docker appropriately
+2. Use platform-specific flags when building and running containers
+3. Mount files correctly to ensure access despite architecture differences
+
+## Platform-Aware Docker Commands
+
+The `platform_docker.sh` script provides commands designed to work on any platform, with special handling for Apple Silicon:
+
+```bash
+# Test if Docker is working correctly
+./platform_docker.sh test
+
+# Analyze YAML files for outliers
+./platform_docker.sh outliers --dir /data/ENV/$SOURCE_DIR --output /data/output/results.json
+
+# Run queries on YAML files
+./platform_docker.sh query --dir /data/ENV --query "select name from metadata when kind is Deployment"
+
+# Open a shell in the container
+./platform_docker.sh shell
+```
+
+## Path Mapping
+
+The Docker setup maps local paths to container paths:
+
+- Local SOURCE_DIR path → `/data/ENV` in container
+- Local output path → `/data/output` in container
+- ICYAML scripts → `/app` in container
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. **Binary compatibility issues**: Ensure you're using the platform_docker.sh script which handles this automatically
+
+2. **Volume mounting errors**: Check that the paths exist and are correctly specified
+
+3. **Performance issues**: Docker on M1 has some overhead, especially for emulated platforms. If performance is critical, consider using a Python virtual environment directly on your Mac
+
+## Alternative: Python Virtual Environment
+
+If Docker continues to cause issues, you can use a Python virtual environment directly:
+
+```bash
+# Create a virtual environment
+python3 -m venv icyaml_venv
+
+# Activate it
+source icyaml_venv/bin/activate
+
+# Install dependencies
+pip install pyyaml
+
+# Run the tools directly
+python3 yaml_outlier_detector.py --dir /path/to/ENV/$SOURCE_DIR --output results.json
+```
+
+This approach bypasses Docker entirely and should work natively on Apple Silicon.
+
+## Additional Resources
+
+- [Docker Desktop for Apple Silicon](https://docs.docker.com/desktop/install/mac-install/)
+- [Python on Apple Silicon](https://www.python.org/downloads/macos/)
