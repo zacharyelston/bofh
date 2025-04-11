@@ -78,6 +78,23 @@ Options:
   --maintain-structure      Maintain source directory structure
 ```
 
+## Enhanced Find Command Integration
+
+The BOFH toolkit includes enhanced integration with the standard Unix `find` utility. This allows for powerful file discovery across complex directory structures:
+
+```bash
+# Find all non-hidden files in the BOFH repository
+find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\.*'
+
+# Find specific file types only
+find /Users/zacelston/AlZacAI/bofh -type f -name "*.sh" -o -name "*.py"
+
+# Find files modified in the last day
+find /Users/zacelston/AlZacAI/bofh -type f -mtime -1
+```
+
+Our `mcp_directory_scanner.sh` tool extends these capabilities with improved filtering, output formatting, and integration with the MCP framework. It can be used as a more powerful alternative to the standard `find` command when working within the BOFH ecosystem.
+
 ## Example Usage
 
 The `example_usage.sh` script demonstrates various use cases for these tools:
@@ -117,13 +134,19 @@ This will show examples of:
 
 ## Integration with BOFH
 
-These tools are fully integrated with the BOFH system and can be used alongside other BOFH utilities. They share the same configuration system and can be invoked through the main BOFH interface.
+These tools are fully integrated with the BOFH system and can be used alongside other BOFH utilities. They share the same configuration system and can be invoked through the main BOFH interface, located at:
+
+```
+/Users/zacelston/AlZacAI/bofh/bin/bofh
+```
 
 ## Performance Considerations
 
 - The JavaScript tools are optimized for large directory structures
 - For very large archives, consider using extraction patterns to avoid memory issues
 - Statistics generation can be resource-intensive on large directories
+- The standard `find` command is highly optimized for file system traversal and should be used for simple filtering tasks
+- Our enhanced tools provide additional functionality at the cost of some performance overhead
 
 ## Future Enhancements
 
@@ -133,6 +156,7 @@ Planned improvements include:
 - Directory synchronization features
 - Content-based search within archives
 - Metadata extraction and indexing
+- Better integration with standard Unix utilities like `find`, `grep`, and `awk`
 
 ## Special Acknowledgments
 
