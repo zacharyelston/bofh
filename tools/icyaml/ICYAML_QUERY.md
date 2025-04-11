@@ -135,7 +135,7 @@ The query functionality is fully integrated with the rest of the ICYAML suite:
 
 ## References
 
-This tool is part of the ICYAML suite following the ModelContextProtocol (MCP) as defined in `/Users/zacelston/AlZacAI/bofh/prompt.yaml`.
+This tool is part of the ICYAML suite following the ModelContextProtocol (MCP) as defined in `prompt.yaml`.
 
 ---
 

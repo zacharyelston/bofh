@@ -166,7 +166,7 @@ Command: bofh.filesystem.yaml_query
 Parameters:
   directory: $SOURCE_DIR/$SOURCE_DIR
   query: "select name from metadata when kind is Deployment and report name:name kind:kind"
-  output: /Users/zacelston/AlZacAI/bofh/output/deployments.json
+  output: output/deployments.json
   format: json
 [/MCP]
 EOF

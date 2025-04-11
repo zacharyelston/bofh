@@ -23,7 +23,7 @@ Command: bofh.filesystem.yaml_catalog
 Parameters:
   directory: $SOURCE_DIR/$SOURCE_DIR
   pattern: *
-  output_dir: /Users/zacelston/AlZacAI/bofh/output
+  output_dir: output
 [/MCP]
 ```
 
@@ -44,7 +44,7 @@ Command: bofh.filesystem.yaml_catalog_enhanced
 Parameters:
   directory: $SOURCE_DIR/$SOURCE_DIR
   pattern: *
-  output_dir: /Users/zacelston/AlZacAI/bofh/output
+  output_dir: output
 [/MCP]
 ```
 
@@ -67,8 +67,8 @@ Command: bofh.filesystem.yaml_catalog_enhanced
 Parameters:
   directory: $SOURCE_DIR/$SOURCE_DIR/us-east-1/spine-partner-service
   pattern: *
-  output_json: /Users/zacelston/AlZacAI/bofh/output/spine-partner-service.json
-  output_graph: /Users/zacelston/AlZacAI/bofh/output/spine-partner-service.dot
+  output_json: output/spine-partner-service.json
+  output_graph: output/spine-partner-service.dot
 [/MCP]
 ```
 
@@ -77,7 +77,7 @@ Parameters:
 After running the catalog, generate a visualization using GraphViz:
 
 ```bash
-dot -Tpng -o /Users/zacelston/AlZacAI/bofh/output/spine-partner-service.png /Users/zacelston/AlZacAI/bofh/output/spine-partner-service.dot
+dot -Tpng -o output/spine-partner-service.png output/spine-partner-service.dot
 ```
 
 ## Example Output Structure
@@ -156,8 +156,8 @@ This catalog can be integrated with other tools in the BOFH toolkit:
 [MCP]
 Command: bofh.filesystem.analyze
 Parameters:
-  directory: /Users/zacelston/AlZacAI/bofh/output
-  output: /Users/zacelston/AlZacAI/bofh/analysis
+  directory: output
+  output: analysis
 [/MCP]
 ```
 

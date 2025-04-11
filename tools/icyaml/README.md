@@ -82,4 +82,4 @@ The tool can be extended by:
 
 ## References
 
-This tool was inspired by the reference at `/Users/zacelston/AlZacAI/bofh/prompt.yaml`.
+This tool was inspired by the reference at `prompt.yaml`.

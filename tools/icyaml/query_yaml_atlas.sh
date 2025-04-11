@@ -5,7 +5,7 @@
 BASE_PATH="$SOURCE_DIR/$SOURCE_DIR"
 
 # Set output paths
-OUTPUT_DIR="/Users/zacelston/AlZacAI/bofh/output"
+OUTPUT_DIR="output"
 JSON_OUTPUT="${OUTPUT_DIR}/env_resources.json"
 
 # Create output directory if it doesn't exist

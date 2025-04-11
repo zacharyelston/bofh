@@ -98,7 +98,7 @@ ICYAML follows the ModelContextProtocol (MCP) and integrates seamlessly with oth
 
 ## References
 
-Developed as part of the BOFH toolkit following the ModelContextProtocol (MCP) as defined in `/Users/zacelston/AlZacAI/bofh/prompt.yaml`.
+Developed as part of the BOFH toolkit following the ModelContextProtocol (MCP) as defined in `prompt.yaml`.
 
 ---
 

@@ -58,7 +58,7 @@ Command: bofh.filesystem.yaml_catalog
 Parameters:
   directory: $SOURCE_DIR
   pattern: *-kustomize
-  output_dir: /Users/zacelston/AlZacAI/bofh/results
+  output_dir: results
 [/MCP]
 ```
 
@@ -69,8 +69,8 @@ Parameters:
 Command: bofh.filesystem.yaml_catalog
 Parameters:
   directory: $SOURCE_DIR/$SOURCE_DIR
-  output_json: /Users/zacelston/AlZacAI/bofh/results/my-catalog.json
-  output_graph: /Users/zacelston/AlZacAI/bofh/results/my-graph.dot
+  output_json: results/my-catalog.json
+  output_graph: results/my-graph.dot
 [/MCP]
 ```
 
@@ -125,4 +125,4 @@ The tool provides detailed error messages and validates inputs before execution.
 
 ## References
 
-This tool follows the ModelContextProtocol (MCP) as defined in `/Users/zacelston/AlZacAI/bofh/prompt.yaml`.
+This tool follows the ModelContextProtocol (MCP) as defined in `prompt.yaml`.

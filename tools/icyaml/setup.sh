@@ -23,7 +23,7 @@ ln -sf "$(dirname "$0")/find_outliers.sh" "$(dirname "$0")/../icyaml_outliers"
 
 # Create output directory
 echo "Creating output directory..."
-mkdir -p "/Users/zacelston/AlZacAI/bofh/output"
+mkdir -p "output"
 
 # Create symbolic link for main executable
 echo "Creating main executable symlink..."

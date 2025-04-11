@@ -8,7 +8,7 @@ BASE_PATH=""
 PATTERN="*-atlas"
 OUTPUT_JSON=""
 OUTPUT_GRAPH=""
-OUTPUT_DIR="/Users/zacelston/AlZacAI/bofh/output"
+OUTPUT_DIR="output"
 
 # Parse MCP command
 parse_mcp_command() {
@@ -130,7 +130,7 @@ Command: bofh.filesystem.yaml_catalog_enhanced
 Parameters:
   directory: $SOURCE_DIR/$SOURCE_DIR
   pattern: *
-  output_dir: /Users/zacelston/AlZacAI/bofh/output
+  output_dir: output
 [/MCP]
 EOF
 }

@@ -48,7 +48,7 @@ This will:
 2. Identify common keys across all directories
 3. Find directories missing those common keys
 4. Generate statistics about key usage
-5. Export the results to `/Users/zacelston/AlZacAI/bofh/output/env_outliers.json`
+5. Export the results to `output/env_outliers.json`
 
 To adjust the threshold for common keys:
 
