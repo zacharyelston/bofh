@@ -26,7 +26,7 @@ The toolkit is organized into several key components:
 The BOFH toolkit uses the following directory structure:
 
 ```
-/Users/zacelston/AlZacAI/bofh/
+bofh/
 ├── bin/                        # Entry point scripts
 │   └── bofh                    # Main command
 ├── config/                     # Configuration files
@@ -138,7 +138,7 @@ or directly:
 The toolkit leverages standard Unix utilities enhanced with additional functionality:
 
 ```bash
-find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\.*'
+find bofh -type f -not -path '*/\.*'
 ```
 
 ### Using the MCP Interface
@@ -184,3 +184,20 @@ Contributions are welcome! Please follow these steps:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Docker Reset
+
+If you encounter ContainerConfig errors or other Docker-related issues, you can reset the Docker environment with:
+
+```bash
+./reset-docker.sh
+```
+
+This script will:
+1. Stop all BOFH containers
+2. Remove all BOFH containers
+3. Remove all BOFH images
+4. Prune volumes
+5. Prune networks
+
+This provides a clean state to rebuild the Docker environment.

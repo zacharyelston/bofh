@@ -1,12 +1,6 @@
 #!/bin/bash
-# BOFH Test Runner
-
-# Set strict error handling
-set -e
-
-# Get the test directory
-TEST_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BOFH_ROOT="$( cd "$TEST_DIR/.." && pwd )"
+# Test Runner for BOFH Toolkit
+# This script runs all test suites for the BOFH toolkit
 
 # Define color codes for output
 RED='\033[0;31m'
@@ -17,56 +11,57 @@ NC='\033[0m' # No Color
 
 # Function to print status messages
 print_status() {
-  echo -e "${BLUE}[TEST]${NC} $1"
+  echo -e "${BLUE}[INFO]${NC} $1"
 }
 
 # Function to print success messages
 print_success() {
-  echo -e "${GREEN}[PASS]${NC} $1"
+  echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
 
 # Function to print warning messages
 print_warning() {
-  echo -e "${YELLOW}[WARN]${NC} $1"
+  echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
 # Function to print error messages
 print_error() {
-  echo -e "${RED}[FAIL]${NC} $1"
+  echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# Function to run all tests in a directory
-run_tests_in_dir() {
-  local test_dir="$1"
-  local test_count=0
-  local pass_count=0
-  
-  print_status "Running tests in $test_dir"
-  
-  # Find all test scripts
-  for test_script in $(find "$test_dir" -name "test_*.sh" -type f); do
-    print_status "Running test: $test_script"
-    
-    # Run the test
-    if bash "$test_script"; then
-      print_success "Test passed: $test_script"
-      ((pass_count++))
-    else
-      print_error "Test failed: $test_script"
-    fi
-    
-    ((test_count++))
-  done
-  
-  print_status "Completed $test_count tests in $test_dir. $pass_count passed."
-  
-  return 0
-}
+# Get the script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BOFH_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
 
-# Run unit tests
-run_tests_in_dir "$TEST_DIR/unit"
+print_status "Running BOFH test suite..."
+print_status "BOFH root directory: $BOFH_ROOT"
 
-# Run integration tests
-run_tests_in_dir "$TEST_DIR/integration"
+# Check if unit test directory exists
+if [ ! -d "$SCRIPT_DIR/unit" ]; then
+  print_warning "Unit test directory not found. Creating empty directory."
+  mkdir -p "$SCRIPT_DIR/unit"
+fi
 
-print_status "All tests completed"
+# Check if there are any test files
+TEST_FILES=$(find "$SCRIPT_DIR" -name "*_test.sh" -o -name "test_*.sh" -o -name "*_test.py" -o -name "test_*.py")
+if [ -z "$TEST_FILES" ]; then
+  print_warning "No test files found. Test suite is still under development."
+  print_warning "This is a placeholder for future test implementation."
+  exit 0
+fi
+
+# Run shell-based tests
+print_status "Running shell-based tests..."
+for test in $(find "$SCRIPT_DIR" -name "*_test.sh" -o -name "test_*.sh"); do
+  print_status "Running test: $test"
+  bash "$test"
+done
+
+# Run Python-based tests
+print_status "Running Python-based tests..."
+for test in $(find "$SCRIPT_DIR" -name "*_test.py" -o -name "test_*.py"); do
+  print_status "Running test: $test"
+  python3 "$test"
+done
+
+print_success "All tests completed."

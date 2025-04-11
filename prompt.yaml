@@ -1,3 +1,33 @@
+# BOFH Toolkit - Edit Guidelines
+# --------------------------------
+# PLEASE READ BEFORE MODIFYING THIS REPOSITORY
+#
+# DEVELOPMENT PRACTICES:
+# 1. ALWAYS create a new branch before making changes:
+#    git checkout -b feature/your-feature-name
+#
+# 2. Make small, atomic commits with clear messages:
+#    git commit -m "fix: resolve ContainerConfig issue in vectorizer"
+#
+# 3. Follow these commit message prefixes:
+#    - feat: (new feature)
+#    - fix: (bug fix)
+#    - docs: (documentation changes)
+#    - style: (formatting, no code change)
+#    - refactor: (code change that neither fixes a bug nor adds a feature)
+#    - test: (adding or updating tests)
+#    - chore: (maintenance tasks)
+#
+# 4. Create a pull request for code review before merging to main
+#
+# 5. IMPORTANT: Validate each step works BEFORE moving to the next task
+#    - Work slowly and methodically
+#    - Test all changes immediately
+#    - Document any issues encountered
+#
+# NOTE: MCP (ModelContextProtocol) is the protocol used by this toolkit for operation.
+# When using MCP-enabled tools, take extra care to follow these guidelines.
+
 title: "ModelContextProtocol (MCP) for BOFH - MVP"
 
 introduction: "This document outlines the basic commands for interacting with the BOFH toolkit through the ModelContextProtocol. The BOFH (Bastard Operator From Hell) toolkit provides utilities for system administration, file manipulation, and Docker operations."
@@ -26,7 +56,7 @@ required_tools:
     - name: "find"
       description: "Recursively search for files and directories"
       usage: "find /path/to/search -type f -not -path '*/\\.*' # Find all non-hidden files"
-      example: "find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\\.*' # Find all non-hidden files in BOFH directory"
+      example: "find bofh -type f -not -path '*/\\.*' # Find all non-hidden files in BOFH directory"
     - name: "grep"
       description: "Search for patterns in files"
       usage: "grep -r 'pattern' /path/to/search # Recursively search for pattern"
@@ -56,42 +86,42 @@ required_tools:
 
 file_paths:
   main_scripts:
-    - path: "/Users/zacelston/AlZacAI/bofh/bin/bofh"
+    - path: "bofh/bin/bofh"
       description: "Main BOFH command line interface"
-    - path: "/Users/zacelston/AlZacAI/bofh/config.sh"
+    - path: "bofh/config.sh"
       description: "Global configuration file"
-    - path: "/Users/zacelston/AlZacAI/bofh/reset-docker.sh"
+    - path: "bofh/reset-docker.sh"
       description: "Script to reset Docker environment"
   tools:
     vectorizer:
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/analyze-directory.sh"
+      - path: "bofh/tools/vectorizer/analyze-directory.sh"
         description: "Main script to analyze directory structure"
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/docker-compose.yml"
+      - path: "bofh/tools/vectorizer/docker-compose.yml"
         description: "Docker Compose configuration for vectorizer"
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/Dockerfile"
+      - path: "bofh/tools/vectorizer/Dockerfile"
         description: "Docker image definition for vectorizer"
     find2tar:
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/find2tar/mcp_directory_scanner.sh"
+      - path: "bofh/tools/find2tar/mcp_directory_scanner.sh"
         description: "Advanced directory scanner with filtering options"
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/find2tar/tar_parser.js"
+      - path: "bofh/tools/find2tar/tar_parser.js"
         description: "Tool for working with TAR archives"
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/find2tar/mcp_batch_processor.sh"
+      - path: "bofh/tools/find2tar/mcp_batch_processor.sh"
         description: "Process files in batches across directories"
     schema_search:
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/schema_search/find_schemas.sh"
+      - path: "bofh/tools/schema_search/find_schemas.sh"
         description: "Find schema patterns in files"
-      - path: "/Users/zacelston/AlZacAI/bofh/tools/schema_search/search_with_ripgrep.sh"
+      - path: "bofh/tools/schema_search/search_with_ripgrep.sh"
         description: "Use ripgrep to search for patterns"
   libraries:
-    - path: "/Users/zacelston/AlZacAI/bofh/lib/filesystem/analysis/analyze_filesystem.py"
+    - path: "bofh/lib/filesystem/analysis/analyze_filesystem.py"
       description: "Core filesystem analysis library"
   configuration:
-    - path: "/Users/zacelston/AlZacAI/bofh/config/mcp/prompt.yaml"
+    - path: "bofh/config/mcp/prompt.yaml"
       description: "MCP protocol configuration"
   tests:
-    - path: "/Users/zacelston/AlZacAI/bofh/tests/run_tests.sh"
+    - path: "bofh/tests/run_tests.sh"
       description: "Main test runner script"
-    - path: "/Users/zacelston/AlZacAI/bofh/tests/unit/filesystem/test_analyze_directory.sh"
+    - path: "bofh/tests/unit/filesystem/test_analyze_directory.sh"
       description: "Unit tests for directory analysis"
 
 mcp_command_structure:
@@ -110,43 +140,43 @@ basic_command_examples:
       parameters:
         directory: "/path/to/target"
         output: "/path/to/output"
-      actual_script: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/analyze-directory.sh"
+      actual_script: "bofh/tools/vectorizer/analyze-directory.sh"
     create_archive:
       command: "bofh.filesystem.archive"
       parameters:
         source: "/path/to/source"
         destination: "/path/to/archive.tar"
         compression: "gzip"
-      actual_script: "/Users/zacelston/AlZacAI/bofh/tools/find2tar/mcp_batch_processor.sh"
+      actual_script: "bofh/tools/find2tar/mcp_batch_processor.sh"
   docker:
     visualize_data:
       command: "bofh.docker.visualize"
       parameters:
         inputData: "/path/to/data"
         outputDir: "/path/to/output"
-      actual_script: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur-viz)"
+      actual_script: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur-viz)"
     run_analysis:
       command: "bofh.docker.analyze"
       parameters:
         inputDir: "/path/to/input"
         outputDir: "/path/to/output"
         logDir: "/path/to/logs"
-      actual_script: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur)"
+      actual_script: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur)"
 
 available_mcp_tools:
   filesystem_management:
     - name: "bofh.filesystem.analyze"
       description: "Analyze directory structure"
-      implementation: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/analyze-directory.sh"
+      implementation: "bofh/tools/vectorizer/analyze-directory.sh"
     - name: "bofh.filesystem.archive"
       description: "Create archive of files"
-      implementation: "/Users/zacelston/AlZacAI/bofh/tools/find2tar/mcp_batch_processor.sh"
+      implementation: "bofh/tools/find2tar/mcp_batch_processor.sh"
     - name: "bofh.filesystem.find"
       description: "Find files by pattern"
-      implementation: "/Users/zacelston/AlZacAI/bofh/tools/find2tar/mcp_directory_scanner.sh"
+      implementation: "bofh/tools/find2tar/mcp_directory_scanner.sh"
     - name: "bofh.filesystem.schema"
       description: "Search for schema patterns"
-      implementation: "/Users/zacelston/AlZacAI/bofh/tools/schema_search/find_schemas.sh"
+      implementation: "bofh/tools/schema_search/find_schemas.sh"
   docker_management:
     - name: "bofh.docker.build"
       description: "Build Docker images"
@@ -156,10 +186,10 @@ available_mcp_tools:
       implementation: "docker-compose up"
     - name: "bofh.docker.analyze"
       description: "Run analysis containers"
-      implementation: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur)"
+      implementation: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur)"
     - name: "bofh.docker.visualize"
       description: "Run visualization containers"
-      implementation: "/Users/zacelston/AlZacAI/bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur-viz)"
+      implementation: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur-viz)"
   system_tools:
     - name: "execute_command"
       description: "Execute a whitelisted shell command"
@@ -203,7 +233,7 @@ command_whitelist:
         description: "Move files and directories"
       - command: "find"
         description: "Search for files and directories recursively"
-        example: "find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\\.*'"
+        example: "find bofh -type f -not -path '*/\\.*'"
     git_commands:
       - command: "git init"
         description: "Initialize git repository"
@@ -258,7 +288,7 @@ command_whitelist:
         description: "Search for patterns in files"
       - command: "find"
         description: "Search for files"
-        example: "find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\\.*' # Find all non-hidden files"
+        example: "find bofh -type f -not -path '*/\\.*' # Find all non-hidden files"
       - command: "tar"
         description: "Create tar archives"
       - command: "gzip"
@@ -282,7 +312,7 @@ command_whitelist:
       command: "find"
       description: "Search for files and directories recursively"
       securityLevel: "safe"
-      example: "find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\\.*'"
+      example: "find bofh -type f -not -path '*/\\.*'"
 
 execute_command_tool:
   description: "The execute_command tool allows you to run whitelisted shell commands"
@@ -292,11 +322,11 @@ execute_command_tool:
       command: "ls"
       args: 
         - "-la"
-        - "/Users/zacelston/AlZacAI/bofh"
+        - "bofh"
   complex_example:
     command: "execute_full_command"
     parameters:
-      command: "find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\\.*'"
+      command: "find bofh -type f -not -path '*/\\.*'"
 
 best_practices:
   - name: "Work on One Task at a Time"
