@@ -92,7 +92,7 @@ run_archiver() {
   print_status "Creating archive from: $1"
   
   if [ -d "$BOFH_ROOT/tools/find2tar" ]; then
-    "$BOFH_ROOT/tools/find2tar/find2tar.sh" "$@"
+    "$BOFH_ROOT/tools/find2tar/mcp_directory_scanner.sh" "$@"
     return $?
   else
     print_error "Archive tool not found"

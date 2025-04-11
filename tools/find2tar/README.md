@@ -84,13 +84,13 @@ The BOFH toolkit includes enhanced integration with the standard Unix `find` uti
 
 ```bash
 # Find all non-hidden files in the BOFH repository
-find /Users/zacelston/AlZacAI/bofh -type f -not -path '*/\.*'
+find bofh -type f -not -path '*/\.*'
 
 # Find specific file types only
-find /Users/zacelston/AlZacAI/bofh -type f -name "*.sh" -o -name "*.py"
+find bofh -type f -name "*.sh" -o -name "*.py"
 
 # Find files modified in the last day
-find /Users/zacelston/AlZacAI/bofh -type f -mtime -1
+find bofh -type f -mtime -1
 ```
 
 Our `mcp_directory_scanner.sh` tool extends these capabilities with improved filtering, output formatting, and integration with the MCP framework. It can be used as a more powerful alternative to the standard `find` command when working within the BOFH ecosystem.
@@ -137,7 +137,7 @@ This will show examples of:
 These tools are fully integrated with the BOFH system and can be used alongside other BOFH utilities. They share the same configuration system and can be invoked through the main BOFH interface, located at:
 
 ```
-/Users/zacelston/AlZacAI/bofh/bin/bofh
+bofh/bin/bofh
 ```
 
 ## Performance Considerations
