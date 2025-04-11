@@ -1,10 +1,10 @@
-# YAML Tree Catalogger Use Case: CFA Ordering Atlas
+# YAML Tree Catalogger Use Case: YAML configuration files
 
-This document provides a concrete example of using the YAML Tree Catalogger tools to analyze the Kubernetes/Kustomize applications in the CFA Ordering Atlas repository.
+This document provides a concrete example of using the YAML Tree Catalogger tools to analyze the Kubernetes/Kustomize applications in the YAML configuration files repository.
 
 ## Overview
 
-The CFA Ordering Atlas repository contains multiple microservices deployed using Kustomize. The structure typically includes:
+The YAML configuration files repository contains multiple microservices deployed using Kustomize. The structure typically includes:
 
 - A directory for each microservice (e.g., `spine-partner-service`)
 - Kustomization files (`kustomization.yaml`)
@@ -21,14 +21,14 @@ First, let's use the standard YAML Tree Catalogger to scan the repository:
 [MCP]
 Command: bofh.filesystem.yaml_catalog
 Parameters:
-  directory: /Users/zacelston/CODE/CFA/sc-ordering-atlas
+  directory: $SOURCE_DIR/$SOURCE_DIR
   pattern: *
   output_dir: /Users/zacelston/AlZacAI/bofh/output
 [/MCP]
 ```
 
 This will:
-1. Scan all directories in the sc-ordering-atlas repository
+1. Scan all directories in the $SOURCE_DIR repository
 2. Identify YAML files and extract service names and app titles
 3. Generate a summary of connections
 4. Export results to JSON and GraphViz dot files
@@ -42,14 +42,14 @@ For a more detailed analysis with Kustomize awareness, use the enhanced version:
 [MCP]
 Command: bofh.filesystem.yaml_catalog_enhanced
 Parameters:
-  directory: /Users/zacelston/CODE/CFA/sc-ordering-atlas
+  directory: $SOURCE_DIR/$SOURCE_DIR
   pattern: *
   output_dir: /Users/zacelston/AlZacAI/bofh/output
 [/MCP]
 ```
 
 This enhanced version will:
-1. Scan all directories in the sc-ordering-atlas repository
+1. Scan all directories in the $SOURCE_DIR repository
 2. Specifically identify Kustomization files
 3. Extract GitHub dependencies from Kustomize resources
 4. Identify patch files and their relationships
@@ -65,7 +65,7 @@ To focus on a particular service:
 [MCP]
 Command: bofh.filesystem.yaml_catalog_enhanced
 Parameters:
-  directory: /Users/zacelston/CODE/CFA/sc-ordering-atlas/us-east-1/spine-partner-service
+  directory: $SOURCE_DIR/$SOURCE_DIR/us-east-1/spine-partner-service
   pattern: *
   output_json: /Users/zacelston/AlZacAI/bofh/output/spine-partner-service.json
   output_graph: /Users/zacelston/AlZacAI/bofh/output/spine-partner-service.dot
@@ -87,12 +87,12 @@ The JSON output will have a structure similar to:
 ```json
 {
   "spine-partner-service": {
-    "path": "/Users/zacelston/CODE/CFA/sc-ordering-atlas/us-east-1/spine-partner-service",
+    "path": "$SOURCE_DIR/$SOURCE_DIR/us-east-1/spine-partner-service",
     "services": [],
     "kustomizations": [
       {
         "type": "kustomization",
-        "file": "/Users/zacelston/CODE/CFA/sc-ordering-atlas/us-east-1/spine-partner-service/kustomization.yaml",
+        "file": "$SOURCE_DIR/$SOURCE_DIR/us-east-1/spine-partner-service/kustomization.yaml",
         "resources": [
           {
             "type": "local",
@@ -102,8 +102,8 @@ The JSON output will have a structure similar to:
         "bases": [
           {
             "type": "github",
-            "url": "https://github.com/cfacorp/scdh-k8s-bases/k8s/spine-partner-service?ref=v2.11",
-            "repo": "cfacorp/scdh-k8s-bases",
+            "url": "https://github.com/envcorp/scdh-k8s-bases/k8s/spine-partner-service?ref=v2.11",
+            "repo": "envcorp/scdh-k8s-bases",
             "path": "k8s/spine-partner-service",
             "ref": "v2.11"
           }
@@ -118,7 +118,7 @@ The JSON output will have a structure similar to:
         ],
         "images": [
           {
-            "name": "cfa-docker.jfrog.io/scdh-spine-partner-service",
+            "name": "ENV-docker.jfrog.io/scdh-spine-partner-service",
             "newTag": "v1.4.6"
           }
         ],

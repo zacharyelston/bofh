@@ -18,13 +18,13 @@ This guide explains how to use the ICYAML tools with Docker, eliminating depende
 
 2. **Analyze YAML configuration files for outliers**:
    ```bash
-   ./analyze_cfa_outliers_docker.sh
+   ./analyze_yaml_outliers_docker.sh
    ```
 
 3. **Run other commands**:
    ```bash
-   ./docker-run.sh outliers --dir /data/cfa --threshold 50 --output /data/output/outliers.json
-   ./docker-run.sh query --dir /data/cfa --query "select name from metadata when kind is Deployment"
+   ./docker-run.sh outliers --dir /data/ENV --threshold 50 --output /data/output/outliers.json
+   ./docker-run.sh query --dir /data/ENV --query "select name from metadata when kind is Deployment"
    ```
 
 ## Docker Commands
@@ -38,27 +38,27 @@ The `docker-run.sh` script provides an easy way to run ICYAML tools in Docker:
 
 - **Run outlier detection**:
   ```bash
-  ./docker-run.sh outliers --dir /data/cfa --threshold 50 --output /data/output/outliers.json
+  ./docker-run.sh outliers --dir /data/ENV --threshold 50 --output /data/output/outliers.json
   ```
 
 - **Run YAML query engine**:
   ```bash
-  ./docker-run.sh query --dir /data/cfa --query "select name from metadata when kind is Deployment"
+  ./docker-run.sh query --dir /data/ENV --query "select name from metadata when kind is Deployment"
   ```
 
 - **Run YAML tree catalogger**:
   ```bash
-  ./docker-run.sh scan --dir /data/cfa --pattern "*" --output /data/output/catalog.json --graph /data/output/relationships.dot
+  ./docker-run.sh scan --dir /data/ENV --pattern "*" --output /data/output/catalog.json --graph /data/output/relationships.dot
   ```
 
 - **Analyze YAML configuration files**:
   ```bash
-  ./docker-run.sh analyze-cfa
+  ./docker-run.sh analyze-ENV
   ```
 
 - **Catalog YAML configuration files**:
   ```bash
-  ./docker-run.sh catalog-cfa
+  ./docker-run.sh catalog-ENV
   ```
 
 - **Open a shell in the container**:
@@ -70,7 +70,7 @@ The `docker-run.sh` script provides an easy way to run ICYAML tools in Docker:
 
 The Docker setup maps local paths to container paths:
 
-- Local CFA path → `/data/cfa` in container
+- Local SOURCE_DIR path → `/data/ENV` in container
 - Local output path → `/data/output` in container
 - ICYAML scripts (current directory) → `/app` in container
 
@@ -81,9 +81,9 @@ When providing paths in your commands, use the container paths.
 You can customize the path mapping by setting environment variables:
 
 ```bash
-export SOURCE_DIR=/path/to/your/cfa
+export SOURCE_DIR=/path/to/your/ENV
 export OUTPUT_PATH=/path/to/your/output
-./docker-run.sh analyze-cfa
+./docker-run.sh analyze-ENV
 ```
 
 ## Common Use Cases
@@ -91,19 +91,19 @@ export OUTPUT_PATH=/path/to/your/output
 ### Find missing keys in YAML structures
 
 ```bash
-./docker-run.sh outliers --dir /data/cfa/$SOURCE_DIR --threshold 50 --output /data/output/outliers.json
+./docker-run.sh outliers --dir /data/ENV/$SOURCE_DIR --threshold 50 --output /data/output/outliers.json
 ```
 
 ### Query for specific values
 
 ```bash
-./docker-run.sh query --dir /data/cfa --query "select name from metadata when kind is Deployment and report name:name kind:kind" --output /data/output/query_results.json
+./docker-run.sh query --dir /data/ENV --query "select name from metadata when kind is Deployment and report name:name kind:kind" --output /data/output/query_results.json
 ```
 
 ### Catalog YAML structures
 
 ```bash
-./docker-run.sh scan --dir /data/cfa --pattern "*" --output /data/output/catalog.json
+./docker-run.sh scan --dir /data/ENV --pattern "*" --output /data/output/catalog.json
 ```
 
 ## Troubleshooting

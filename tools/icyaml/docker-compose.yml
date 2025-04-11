@@ -9,7 +9,7 @@ services:
     container_name: icyaml
     volumes:
       - .:/app
-      - ${SOURCE_DIR:-$SOURCE_DIR}:/data/cfa
+      - ${SOURCE_DIR:-$SOURCE_DIR}:/data/ENV
       - ${OUTPUT_PATH:-../../../output}:/data/output
     environment:
       - SOURCE_DIR=${SOURCE_DIR:-$SOURCE_DIR}

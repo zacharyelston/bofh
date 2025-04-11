@@ -5,11 +5,11 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Auto-detect CFA path if not provided
+# Auto-detect SOURCE_DIR path if not provided
 if [ -z "$SOURCE_DIR" ]; then
     # Try to find it relative to the script directory
-    if [ -d "$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/CFA" ]; then
-        export SOURCE_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/CFA"
+    if [ -d "$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/SOURCE_DIR" ]; then
+        export SOURCE_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/SOURCE_DIR"
     else
         # Fall back to a relative path
         export SOURCE_DIR="$SOURCE_DIR"
@@ -40,14 +40,14 @@ docker run --rm icyaml-simple python3 --version
 echo "Running analysis..."
 docker run --rm \
   -v "$SCRIPT_DIR:/app" \
-  -v "$SOURCE_DIR:/data/cfa" \
+  -v "$SOURCE_DIR:/data/ENV" \
   -v "$OUTPUT_PATH:/data/output" \
   icyaml-simple \
   python3 /app/yaml_outlier_detector.py \
-    --dir /data/cfa/$SOURCE_DIR \
+    --dir /data/ENV/$SOURCE_DIR \
     --pattern "*" \
     --threshold 50 \
-    --output /data/output/cfa_outliers.json
+    --output /data/output/env_outliers.json
 
 # Check if the command was successful
 if [ $? -ne 0 ]; then
@@ -57,7 +57,7 @@ fi
 
 echo ""
 echo "Analysis completed:"
-echo "- JSON output: $OUTPUT_PATH/cfa_outliers.json"
+echo "- JSON output: $OUTPUT_PATH/env_outliers.json"
 echo ""
 echo "Next steps:"
 echo "1. Examine the outliers to identify patterns"

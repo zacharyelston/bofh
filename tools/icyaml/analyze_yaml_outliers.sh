@@ -6,10 +6,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PARENT_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")"
 OUTPUT_DIR="$PARENT_DIR/output"
 
-# Auto-detect CFA path if not provided
+# Auto-detect SOURCE_DIR path if not provided
 if [ -z "$SOURCE_DIR" ]; then
     # Try to find it relative to the script directory
-    if [ -d "$(dirname "$PARENT_DIR")/CODE/CFA" ]; then
+    if [ -d "$(dirname "$PARENT_DIR")/CODE/SOURCE_DIR" ]; then
         BASE_PATH="$(dirname "$PARENT_DIR")/CODE/$SOURCE_DIR"
     else
         # Fall back to a relative path
@@ -22,7 +22,7 @@ else
 fi
 
 # Set output paths
-JSON_OUTPUT="${OUTPUT_DIR}/cfa_outliers.json"
+JSON_OUTPUT="${OUTPUT_DIR}/env_outliers.json"
 
 # Create output directory if it doesn't exist
 mkdir -p "${OUTPUT_DIR}"
@@ -59,7 +59,7 @@ parse_args() {
                 ;;
             *)
                 echo "Unknown option: $1"
-                echo "Usage: analyze_cfa_outliers.sh [--threshold N] [--verbose]"
+                echo "Usage: analyze_yaml_outliers.sh [--threshold N] [--verbose]"
                 exit 1
                 ;;
         esac
@@ -102,7 +102,7 @@ main() {
     echo "3. Use 'icyaml query' to investigate specific key values"
     echo ""
     echo "To adjust the analysis threshold:"
-    echo "  ./analyze_cfa_outliers.sh --threshold 75"
+    echo "  ./analyze_yaml_outliers.sh --threshold 75"
 }
 
 # Run the main function

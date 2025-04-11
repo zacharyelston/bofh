@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to analyze YAML structure outliers in CFA specifically for Apple Silicon Macs
+# Script to analyze YAML structure outliers in SOURCE_DIR specifically for Apple Silicon Macs
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -19,13 +19,13 @@ if [ -z "$OUTPUT_PATH" ]; then
 fi
 
 # Set default values
-SUBDIR="sc-ordering-atlas"  # Default subdirectory to analyze
+SUBDIR="$SOURCE_DIR"  # Default subdirectory to analyze
 PATTERN="*"                 # Default file pattern
 THRESHOLD=50                # Default threshold percentage
-OUTPUT_FILE="cfa_outliers.json"  # Default output file
+OUTPUT_FILE="outliers.json"  # Default output file
 
 # Display header
-echo "🔍 ICYAML CFA Analyzer for Apple Silicon Macs"
+echo "🔍 ICYAML SOURCE_DIR Analyzer for Apple Silicon Macs"
 echo "=============================================="
 echo "Source Directory: $SOURCE_DIR"
 echo "Subdirectory: $SUBDIR"
@@ -36,7 +36,7 @@ echo "Output Path: $OUTPUT_PATH"
 
 # If the test was successful, run the outlier detection
 if [ $? -eq 0 ]; then
-    echo "🔍 Analyzing CFA YAML structures for outliers..."
+    echo "🔍 Analyzing SOURCE_DIR YAML structures for outliers..."
     
     # Run the analysis
     "$SCRIPT_DIR/run_analysis.sh" \

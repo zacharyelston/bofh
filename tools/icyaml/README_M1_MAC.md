@@ -14,8 +14,8 @@ This guide explains how to use the ICYAML tools on Apple Silicon Macs, which req
 
 2. **Analyze YAML configuration files for outliers**:
    ```bash
-   chmod +x analyze_cfa_m1.sh
-   ./analyze_cfa_m1.sh
+   chmod +x analyze_yaml_m1.sh
+   ./analyze_yaml_m1.sh
    ```
 
 ## Understanding the M1/M2/M3 Issue
@@ -36,10 +36,10 @@ The `platform_docker.sh` script provides commands designed to work on any platfo
 ./platform_docker.sh test
 
 # Analyze YAML files for outliers
-./platform_docker.sh outliers --dir /data/cfa/$SOURCE_DIR --output /data/output/results.json
+./platform_docker.sh outliers --dir /data/ENV/$SOURCE_DIR --output /data/output/results.json
 
 # Run queries on YAML files
-./platform_docker.sh query --dir /data/cfa --query "select name from metadata when kind is Deployment"
+./platform_docker.sh query --dir /data/ENV --query "select name from metadata when kind is Deployment"
 
 # Open a shell in the container
 ./platform_docker.sh shell
@@ -49,7 +49,7 @@ The `platform_docker.sh` script provides commands designed to work on any platfo
 
 The Docker setup maps local paths to container paths:
 
-- Local CFA path → `/data/cfa` in container
+- Local SOURCE_DIR path → `/data/ENV` in container
 - Local output path → `/data/output` in container
 - ICYAML scripts → `/app` in container
 
@@ -78,7 +78,7 @@ source icyaml_venv/bin/activate
 pip install pyyaml
 
 # Run the tools directly
-python3 yaml_outlier_detector.py --dir /path/to/cfa/$SOURCE_DIR --output results.json
+python3 yaml_outlier_detector.py --dir /path/to/ENV/$SOURCE_DIR --output results.json
 ```
 
 This approach bypasses Docker entirely and should work natively on Apple Silicon.

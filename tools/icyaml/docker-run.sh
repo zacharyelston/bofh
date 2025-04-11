@@ -33,23 +33,23 @@ display_usage() {
     echo "  scan               Run scan command with Docker"
     echo "  query              Run query command with Docker"
     echo "  outliers           Run outlier detection with Docker"
-    echo "  analyze-cfa        Analyze YAML configuration files for outliers"
-    echo "  catalog-cfa        Catalog YAML configuration files YAML files"
+    echo "  analyze-ENV        Analyze YAML configuration files for outliers"
+    echo "  catalog-ENV        Catalog YAML configuration files YAML files"
     echo "  shell              Start a shell in the container"
     echo "  test               Run tests to verify container functionality"
     echo "  help               Display this help message"
     echo ""
     echo "Examples:"
     echo "  ./docker-run.sh build"
-    echo "  ./docker-run.sh outliers --dir /data/cfa --threshold 50 --output /data/output/outliers.json"
-    echo "  ./docker-run.sh analyze-cfa"
-    echo "  ./docker-run.sh catalog-cfa"
-    echo "  ./docker-run.sh query --dir /data/cfa --query \"select name from metadata when kind is Deployment\""
+    echo "  ./docker-run.sh outliers --dir /data/ENV --threshold 50 --output /data/output/outliers.json"
+    echo "  ./docker-run.sh analyze-ENV"
+    echo "  ./docker-run.sh catalog-ENV"
+    echo "  ./docker-run.sh query --dir /data/ENV --query \"select name from metadata when kind is Deployment\""
     echo "  ./docker-run.sh shell"
     echo "  ./docker-run.sh test"
     echo ""
     echo "Environment Variables:"
-    echo "  SOURCE_DIR           Path to CFA code (default: auto-detected relative path)"
+    echo "  SOURCE_DIR           Path to SOURCE_DIR code (default: auto-detected relative path)"
     echo "  OUTPUT_PATH        Path for output files (default: ../../../output relative to script)"
     echo "  DEBUG              Set to 'true' for more verbose debugging output"
     echo ""
@@ -109,11 +109,11 @@ run_container() {
     local command="$1"
     shift
     
-    # Auto-detect CFA path if not provided
+    # Auto-detect SOURCE_DIR path if not provided
     if [ -z "$SOURCE_DIR" ]; then
         # Try to find it relative to the script directory
-        if [ -d "$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/CFA" ]; then
-            export SOURCE_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/CFA"
+        if [ -d "$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/SOURCE_DIR" ]; then
+            export SOURCE_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/SOURCE_DIR"
         else
             # Fall back to a relative path
             export SOURCE_DIR="$SOURCE_DIR"
@@ -187,11 +187,11 @@ main() {
         outliers)
             run_container "python3" "yaml_outlier_detector.py" "$@"
             ;;
-        analyze-cfa)
-            run_container "bash" "analyze_cfa_outliers.sh" "$@"
+        analyze-ENV)
+            run_container "bash" "analyze_yaml_outliers.sh" "$@"
             ;;
-        catalog-cfa)
-            run_container "bash" "catalog_cfa_atlas.sh" "$@"
+        catalog-ENV)
+            run_container "bash" "catalog_yaml_atlas.sh" "$@"
             ;;
         shell)
             run_container "bash"

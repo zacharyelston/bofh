@@ -1,12 +1,12 @@
 #!/bin/bash
-# Script to query Kubernetes resources in CFA ordering-atlas directories
+# Script to query Kubernetes resources in YAML configuration files directories
 
 # Set the base path for the search
-BASE_PATH="/Users/zacelston/CODE/CFA/sc-ordering-atlas"
+BASE_PATH="$SOURCE_DIR/$SOURCE_DIR"
 
 # Set output paths
 OUTPUT_DIR="/Users/zacelston/AlZacAI/bofh/output"
-JSON_OUTPUT="${OUTPUT_DIR}/cfa_resources.json"
+JSON_OUTPUT="${OUTPUT_DIR}/env_resources.json"
 
 # Create output directory if it doesn't exist
 mkdir -p "${OUTPUT_DIR}"
@@ -30,7 +30,7 @@ display_logo() {
 }
 
 display_usage() {
-    echo "Usage: query_cfa_atlas.sh [query_type]"
+    echo "Usage: query_yaml_atlas.sh [query_type]"
     echo ""
     echo "Query Types:"
     echo "  deployments     Find all deployments and their metadata"
@@ -43,9 +43,9 @@ display_usage() {
     echo "  custom \"query\"  Execute a custom query (enclose in quotes)"
     echo ""
     echo "Examples:"
-    echo "  ./query_cfa_atlas.sh deployments"
-    echo "  ./query_cfa_atlas.sh images"
-    echo "  ./query_cfa_atlas.sh custom \"select image from spec when kind is Deployment\""
+    echo "  ./query_yaml_atlas.sh deployments"
+    echo "  ./query_yaml_atlas.sh images"
+    echo "  ./query_yaml_atlas.sh custom \"select image from spec when kind is Deployment\""
     echo ""
 }
 
@@ -57,31 +57,31 @@ run_query() {
     case "$query_type" in
         deployments)
             query="select name from metadata when kind is Deployment and report name:name kind:kind"
-            output_file="${OUTPUT_DIR}/cfa_deployments.json"
+            output_file="${OUTPUT_DIR}/env_deployments.json"
             ;;
         services)
             query="select name from metadata when kind is Service and report name:name kind:kind"
-            output_file="${OUTPUT_DIR}/cfa_services.json"
+            output_file="${OUTPUT_DIR}/env_services.json"
             ;;
         configmaps)
             query="select name from metadata when kind is ConfigMap and report name:name kind:kind"
-            output_file="${OUTPUT_DIR}/cfa_configmaps.json"
+            output_file="${OUTPUT_DIR}/env_configmaps.json"
             ;;
         resources)
             query="select kind from kind node when metadata is metadata and report kind:kind"
-            output_file="${OUTPUT_DIR}/cfa_resources.json"
+            output_file="${OUTPUT_DIR}/env_resources.json"
             ;;
         images)
             query="select image from image node when spec is spec and report image:image"
-            output_file="${OUTPUT_DIR}/cfa_images.json"
+            output_file="${OUTPUT_DIR}/env_images.json"
             ;;
         namespaces)
             query="select name from metadata when kind is Namespace and report name:name"
-            output_file="${OUTPUT_DIR}/cfa_namespaces.json"
+            output_file="${OUTPUT_DIR}/env_namespaces.json"
             ;;
         connections)
             query="select app from selector when metadata is metadata and report app:app"
-            output_file="${OUTPUT_DIR}/cfa_connections.json"
+            output_file="${OUTPUT_DIR}/env_connections.json"
             ;;
         custom)
             if [ -z "$custom_query" ]; then
@@ -90,7 +90,7 @@ run_query() {
                 exit 1
             fi
             query="$custom_query"
-            output_file="${OUTPUT_DIR}/cfa_custom_query.json"
+            output_file="${OUTPUT_DIR}/env_custom_query.json"
             ;;
         *)
             echo "Error: Unknown query type: $query_type"

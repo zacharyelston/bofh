@@ -67,7 +67,7 @@ The ICYAML Query tool can be used directly from the command line:
 ```
 
 ```bash
-./query_cfa_atlas.sh deployments
+./query_yaml_atlas.sh deployments
 ```
 
 ## MCP Protocol Usage

@@ -30,8 +30,8 @@ ICYAML ("I See YAML") is a suite of tools for searching filesystem structures, d
 - `mcp_yaml_catalogger_enhanced.sh` - MCP-compatible wrapper for the enhanced tool
 
 ### Example Scripts
-- `catalog_cfa_atlas.sh` - Ready-to-use script for the YAML configuration files repository
-- `catalog_cfa_example.md` - Concrete example for using ICYAML with the CFA repository
+- `catalog_yaml_atlas.sh` - Ready-to-use script for the YAML configuration files repository
+- `catalog_yaml_example.md` - Concrete example for using ICYAML with the SOURCE_DIR repository
 
 ## Usage Examples
 

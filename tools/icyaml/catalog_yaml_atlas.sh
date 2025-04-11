@@ -1,24 +1,24 @@
 #!/bin/bash
-# Script to catalog YAML trees in CFA ordering-atlas directories
+# Script to catalog YAML trees in YAML configuration files directories
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PARENT_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")"
 OUTPUT_DIR="$PARENT_DIR/output"
 
-# Auto-detect CFA path if not provided
-if [ -z "$CFA_PATH" ]; then
+# Auto-detect SOURCE_DIR path if not provided
+if [ -z "$SOURCE_DIR" ]; then
     # Try to find it relative to the script directory
-    if [ -d "$(dirname "$PARENT_DIR")/CODE/CFA" ]; then
-        BASE_PATH="$(dirname "$PARENT_DIR")/CODE/CFA/sc-ordering-atlas"
+    if [ -d "$(dirname "$PARENT_DIR")/CODE/SOURCE_DIR" ]; then
+        BASE_PATH="$(dirname "$PARENT_DIR")/CODE/$SOURCE_DIR"
     else
         # Fall back to a relative path
-        BASE_PATH="../../../CODE/CFA/sc-ordering-atlas"
-        echo "Warning: CFA_PATH not specified and couldn't be auto-detected."
+        BASE_PATH="$SOURCE_DIR/$SOURCE_DIR"
+        echo "Warning: SOURCE_DIR not specified and couldn't be auto-detected."
         echo "Using relative path: $BASE_PATH"
     fi
 else
-    BASE_PATH="$CFA_PATH/sc-ordering-atlas"
+    BASE_PATH="$SOURCE_DIR/$SOURCE_DIR"
 fi
 
 # Set output paths

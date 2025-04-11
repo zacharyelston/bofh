@@ -5,11 +5,11 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Auto-detect CFA path if not provided
+# Auto-detect SOURCE_DIR path if not provided
 if [ -z "$SOURCE_DIR" ]; then
     # Try to find it relative to the script directory
-    if [ -d "$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/CFA" ]; then
-        export SOURCE_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/CFA"
+    if [ -d "$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/SOURCE_DIR" ]; then
+        export SOURCE_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")/CODE/SOURCE_DIR"
     else
         # Fall back to a relative path
         export SOURCE_DIR="$SOURCE_DIR"
@@ -75,8 +75,8 @@ display_usage() {
     echo ""
     echo "Examples:"
     echo "  ./platform_docker.sh test"
-    echo "  ./platform_docker.sh outliers --dir /data/cfa/$SOURCE_DIR --output /data/output/results.json"
-    echo "  ./platform_docker.sh query --dir /data/cfa --query \"select name from metadata when kind is Deployment\""
+    echo "  ./platform_docker.sh outliers --dir /data/ENV/$SOURCE_DIR --output /data/output/results.json"
+    echo "  ./platform_docker.sh query --dir /data/ENV --query \"select name from metadata when kind is Deployment\""
     echo ""
 }
 
@@ -122,7 +122,7 @@ run_docker_command() {
         # For Apple Silicon
         docker run --platform=linux/arm64 --rm \
             -v "$SCRIPT_DIR:/app" \
-            -v "$SOURCE_DIR:/data/cfa" \
+            -v "$SOURCE_DIR:/data/ENV" \
             -v "$OUTPUT_PATH:/data/output" \
             icyaml:platform-aware \
             python3 "/app/$script" "$@"
@@ -130,7 +130,7 @@ run_docker_command() {
         # For other platforms
         docker run --rm \
             -v "$SCRIPT_DIR:/app" \
-            -v "$SOURCE_DIR:/data/cfa" \
+            -v "$SOURCE_DIR:/data/ENV" \
             -v "$OUTPUT_PATH:/data/output" \
             icyaml:platform-aware \
             python3 "/app/$script" "$@"
@@ -173,14 +173,14 @@ case "$command" in
         if [ "$IS_APPLE_SILICON" = true ]; then
             docker run --platform=linux/arm64 -it --rm \
                 -v "$SCRIPT_DIR:/app" \
-                -v "$SOURCE_DIR:/data/cfa" \
+                -v "$SOURCE_DIR:/data/ENV" \
                 -v "$OUTPUT_PATH:/data/output" \
                 icyaml:platform-aware \
                 /bin/bash
         else
             docker run -it --rm \
                 -v "$SCRIPT_DIR:/app" \
-                -v "$SOURCE_DIR:/data/cfa" \
+                -v "$SOURCE_DIR:/data/ENV" \
                 -v "$OUTPUT_PATH:/data/output" \
                 icyaml:platform-aware \
                 /bin/bash
