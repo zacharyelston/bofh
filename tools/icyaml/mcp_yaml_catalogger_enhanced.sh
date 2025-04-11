@@ -1,0 +1,190 @@
+#!/bin/bash
+# MCP Enhanced YAML Tree Catalogger
+# Tool to search filesystem for YAML trees and build connection summaries with Kustomize awareness
+# Following ModelContextProtocol (MCP) pattern
+
+# Set default values
+BASE_PATH=""
+PATTERN="*-atlas"
+OUTPUT_JSON=""
+OUTPUT_GRAPH=""
+OUTPUT_DIR="output"
+
+# Parse MCP command
+parse_mcp_command() {
+    echo "Parsing MCP command..."
+    
+    # Extract command parameters
+    if [[ "$1" =~ directory:\ *(.*) ]]; then
+        BASE_PATH="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ pattern:\ *(.*) ]]; then
+        PATTERN="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ output_json:\ *(.*) ]]; then
+        OUTPUT_JSON="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ output_graph:\ *(.*) ]]; then
+        OUTPUT_GRAPH="${BASH_REMATCH[1]}"
+    fi
+    
+    if [[ "$1" =~ output_dir:\ *(.*) ]]; then
+        OUTPUT_DIR="${BASH_REMATCH[1]}"
+    fi
+    
+    # Validate required parameters
+    if [ -z "$BASE_PATH" ]; then
+        echo "Error: Missing required parameter 'directory'"
+        exit 1
+    fi
+    
+    # Set default output paths if not specified
+    if [ -z "$OUTPUT_JSON" ]; then
+        OUTPUT_JSON="${OUTPUT_DIR}/yaml_catalog.json"
+    fi
+    
+    if [ -z "$OUTPUT_GRAPH" ]; then
+        OUTPUT_GRAPH="${OUTPUT_DIR}/yaml_relationships.dot"
+    fi
+}
+
+# Validate input parameters
+validate_inputs() {
+    echo "Validating inputs..."
+    
+    # Check if base path exists
+    if [ ! -d "$BASE_PATH" ]; then
+        echo "Error: Directory '$BASE_PATH' does not exist"
+        exit 1
+    fi
+    
+    # Create output directory if it doesn't exist
+    mkdir -p "$(dirname "$OUTPUT_JSON")"
+    mkdir -p "$(dirname "$OUTPUT_GRAPH")"
+}
+
+# Run the YAML tree catalogger
+run_catalogger() {
+    echo "Running Enhanced YAML tree catalogger..."
+    echo "- Base Path: $BASE_PATH"
+    echo "- Pattern: $PATTERN"
+    echo "- Output JSON: $OUTPUT_JSON"
+    echo "- Output Graph: $OUTPUT_GRAPH"
+    
+    # Run the Python script
+    python "$(dirname "$0")/yaml_tree_catalogger_enhanced.py" "$BASE_PATH" \
+        --pattern "$PATTERN" \
+        --output "$OUTPUT_JSON" \
+        --graph "$OUTPUT_GRAPH"
+    
+    # Check if the command was successful
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to run YAML tree catalogger"
+        exit 1
+    fi
+    
+    echo "Catalog completed successfully"
+    echo "- JSON output: $OUTPUT_JSON"
+    echo "- Graph DOT file: $OUTPUT_GRAPH"
+    
+    # Generate visualization if GraphViz is installed
+    if command -v dot &> /dev/null; then
+        GRAPH_PNG="${OUTPUT_GRAPH%.dot}.png"
+        echo "Generating visualization..."
+        dot -Tpng -o "$GRAPH_PNG" "$OUTPUT_GRAPH"
+        
+        if [ $? -eq 0 ]; then
+            echo "- Visualization: $GRAPH_PNG"
+        else
+            echo "Error: Failed to generate visualization"
+        fi
+    else
+        echo "Note: GraphViz 'dot' command not found. Install GraphViz to generate visualizations."
+    fi
+}
+
+# Display MCP usage
+display_usage() {
+    cat << EOF
+[MCP]
+Command: bofh.filesystem.yaml_catalog_enhanced
+Parameters:
+  directory: /path/to/search
+  pattern: *-atlas (optional)
+  output_json: /path/to/output.json (optional)
+  output_graph: /path/to/output.dot (optional)
+  output_dir: /path/to/output/directory (optional)
+[/MCP]
+
+Description:
+  Enhanced version of yaml_catalog that searches the filesystem for YAML trees in directories 
+  matching the specified pattern, with special handling for Kustomize resources and relationships.
+  This version can identify GitHub dependencies, Kubernetes resources, and visualize the relationships.
+
+Example:
+[MCP]
+Command: bofh.filesystem.yaml_catalog_enhanced
+Parameters:
+  directory: $SOURCE_DIR/$SOURCE_DIR
+  pattern: *
+  output_dir: output
+[/MCP]
+EOF
+}
+
+# Main function
+main() {
+    # Check if we're being asked for usage
+    if [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+        display_usage
+        exit 0
+    fi
+    
+    # Check if we have an MCP command
+    if [[ "$1" =~ ^\[MCP\] ]]; then
+        parse_mcp_command "$1"
+    else
+        # Assume direct command line arguments
+        BASE_PATH="$1"
+        shift
+        
+        # Parse optional arguments
+        while [ $# -gt 0 ]; do
+            case "$1" in
+                --pattern=*)
+                    PATTERN="${1#*=}"
+                    ;;
+                --output-json=*)
+                    OUTPUT_JSON="${1#*=}"
+                    ;;
+                --output-graph=*)
+                    OUTPUT_GRAPH="${1#*=}"
+                    ;;
+                --output-dir=*)
+                    OUTPUT_DIR="${1#*=}"
+                    ;;
+                *)
+                    echo "Unknown option: $1"
+                    display_usage
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+    fi
+    
+    # Validate inputs
+    validate_inputs
+    
+    # Run the catalogger
+    run_catalogger
+}
+
+# Print MCP tool identification
+echo "MCP Enhanced YAML Tree Catalogger - Following ModelContextProtocol (MCP)"
+
+# Execute main function
+main "$@"

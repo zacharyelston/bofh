@@ -1,0 +1,361 @@
+#!/bin/bash
+# ICYAML - "I See YAML" - Main Entry Point
+# A tool for seeing structured YAML data like the kid in Sixth Sense sees dead people
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Display the ASCII art logo
+display_logo() {
+    echo -e "\033[1;36m"
+    echo "  _____  _______     __      _      __  __  _      "
+    echo " |_   _|/ ____\\ \\   / //\\   | |    |  \\/  || |     "
+    echo "   | | | |     \\ \\_/ //  \\  | |    | \\  / || |     "
+    echo "   | | | |      \\   // /\\ \\ | |    | |\\/| || |     "
+    echo "  _| |_| |____   | |/ ____ \\| |____| |  | || |____ "
+    echo " |_____|\\_____|  |_/_/    \\_\\______|_|  |_||______|"
+    echo -e "\033[0m"
+    echo "  \"I see YAML trees... walking around like regular files.\""
+    echo "  \"They don't know they're structured data.\""
+    echo ""
+}
+
+# Display the usage information
+display_usage() {
+    echo "Usage: icyaml [command] [options]"
+    echo ""
+    echo "Commands:"
+    echo "  scan              Scan directories for YAML files and catalog them"
+    echo "  scan-enhanced     Advanced scan with Kustomize awareness"
+    echo "  query             SQL-like querying of YAML structures"
+    echo "  visualize         Generate visualization from a catalog file"
+    echo "  help              Display this help message"
+    echo ""
+    echo "Scan Options:"
+    echo "  --dir, -d         Directory to scan"
+    echo "  --pattern, -p     Directory pattern to match (default: *)"
+    echo "  --output, -o      Output directory"
+    echo "  --json, -j        JSON output file"
+    echo "  --graph, -g       GraphViz DOT output file"
+    echo "  --mcp             Use MCP protocol format"
+    echo ""
+    echo "Query Options:"
+    echo "  --dir, -d         Directory containing YAML files"
+    echo "  --file, -f        Single YAML file to query"
+    echo "  --pattern, -p     File pattern to match (default: *)"
+    echo "  --query, -q       SQL-like query to execute"
+    echo "  --output, -o      Output file for results"
+    echo "  --format          Output format (json, yaml, text)"
+    echo "  --verbose, -v     Enable verbose output"
+    echo ""
+    echo "Examples:"
+    echo "  icyaml scan --dir /path/to/project --pattern '*-atlas' --output /path/to/output"
+    echo "  icyaml scan-enhanced --dir /path/to/project --output /path/to/output"
+    echo "  icyaml query --dir /path/to/project --query \"select name from metadata when kind is Deployment\""
+    echo "  icyaml visualize --graph /path/to/catalog.dot"
+    echo ""
+    echo "Query Examples:"
+    echo "  \"select ValueB from keyB node when parent KeyA is ValueA and report KeyB:ValueB KeyA:ValueA\""
+    echo "  \"select name from metadata node when kind is Deployment and report name:name kind:kind\""
+    echo "  \"select image from spec when name is deployment and report image:image name:name\""
+    echo ""
+    echo "MCP Protocol Format:"
+    echo "  icyaml mcp \"[MCP]"
+    echo "Command: bofh.filesystem.yaml_catalog"
+    echo "Parameters:"
+    echo "  directory: /path/to/project"
+    echo "  pattern: *-atlas"
+    echo "  output_dir: /path/to/output"
+    echo "[/MCP]\""
+    echo ""
+}
+
+# Convert options to MCP format
+convert_to_mcp() {
+    local command="$1"
+    local dir="$2"
+    local pattern="$3"
+    local output="$4"
+    local json="$5"
+    local graph="$6"
+    
+    if [ "$command" == "scan" ]; then
+        mcp_command="bofh.filesystem.yaml_catalog"
+    else
+        mcp_command="bofh.filesystem.yaml_catalog_enhanced"
+    fi
+    
+    echo "[MCP]"
+    echo "Command: $mcp_command"
+    echo "Parameters:"
+    echo "  directory: $dir"
+    if [ -n "$pattern" ]; then
+        echo "  pattern: $pattern"
+    fi
+    if [ -n "$output" ]; then
+        echo "  output_dir: $output"
+    fi
+    if [ -n "$json" ]; then
+        echo "  output_json: $json"
+    fi
+    if [ -n "$graph" ]; then
+        echo "  output_graph: $graph"
+    fi
+    echo "[/MCP]"
+}
+
+# Run the visualizer
+run_visualizer() {
+    local graph_file="$1"
+    
+    if [ -z "$graph_file" ]; then
+        echo "Error: No graph file specified"
+        exit 1
+    fi
+    
+    if [ ! -f "$graph_file" ]; then
+        echo "Error: Graph file '$graph_file' not found"
+        exit 1
+    fi
+    
+    # Generate PNG from DOT file
+    png_file="${graph_file%.dot}.png"
+    
+    if command -v dot &> /dev/null; then
+        echo "Generating visualization..."
+        dot -Tpng -o "$png_file" "$graph_file"
+        
+        if [ $? -eq 0 ]; then
+            echo "Visualization generated: $png_file"
+            
+            # Try to open the PNG file if possible
+            if command -v open &> /dev/null; then
+                echo "Opening visualization..."
+                open "$png_file"
+            elif command -v xdg-open &> /dev/null; then
+                echo "Opening visualization..."
+                xdg-open "$png_file"
+            else
+                echo "Visualization saved to: $png_file"
+            fi
+        else
+            echo "Error: Failed to generate visualization"
+            exit 1
+        fi
+    else
+        echo "Error: GraphViz 'dot' command not found. Please install GraphViz."
+        exit 1
+    fi
+}
+
+# Run the query engine
+run_query_engine() {
+    # Check if Python is available
+    if ! command -v python3 &> /dev/null; then
+        echo "Error: Python 3 is required for querying but not found."
+        exit 1
+    fi
+    
+    # Run the query engine directly
+    python3 "${SCRIPT_DIR}/yaml_query_engine.py" "$@"
+}
+
+# Main function
+main() {
+    # Display the logo
+    display_logo
+    
+    # Check if we have arguments
+    if [ $# -eq 0 ]; then
+        display_usage
+        exit 0
+    fi
+    
+    # Parse the command
+    command="$1"
+    shift
+    
+    case "$command" in
+        scan)
+            # Parse options
+            while [ $# -gt 0 ]; do
+                case "$1" in
+                    --dir|-d)
+                        dir="$2"
+                        shift 2
+                        ;;
+                    --pattern|-p)
+                        pattern="$2"
+                        shift 2
+                        ;;
+                    --output|-o)
+                        output="$2"
+                        shift 2
+                        ;;
+                    --json|-j)
+                        json="$2"
+                        shift 2
+                        ;;
+                    --graph|-g)
+                        graph="$2"
+                        shift 2
+                        ;;
+                    --mcp)
+                        use_mcp=1
+                        shift
+                        ;;
+                    *)
+                        echo "Unknown option: $1"
+                        display_usage
+                        exit 1
+                        ;;
+                esac
+            done
+            
+            # Check required options
+            if [ -z "$dir" ]; then
+                echo "Error: No directory specified"
+                display_usage
+                exit 1
+            fi
+            
+            # Set default pattern
+            if [ -z "$pattern" ]; then
+                pattern="*"
+            fi
+            
+            # Convert to MCP if requested
+            if [ -n "$use_mcp" ]; then
+                mcp_command=$(convert_to_mcp "scan" "$dir" "$pattern" "$output" "$json" "$graph")
+                echo "$mcp_command"
+                "${SCRIPT_DIR}/mcp_yaml_catalogger.sh" "$mcp_command"
+            else
+                # Run the scanner directly
+                python3 "${SCRIPT_DIR}/yaml_tree_catalogger.py" "$dir" \
+                    --pattern "$pattern" \
+                    ${output:+--output "$output"} \
+                    ${json:+--output "$json"} \
+                    ${graph:+--graph "$graph"}
+            fi
+            ;;
+            
+        scan-enhanced)
+            # Parse options
+            while [ $# -gt 0 ]; do
+                case "$1" in
+                    --dir|-d)
+                        dir="$2"
+                        shift 2
+                        ;;
+                    --pattern|-p)
+                        pattern="$2"
+                        shift 2
+                        ;;
+                    --output|-o)
+                        output="$2"
+                        shift 2
+                        ;;
+                    --json|-j)
+                        json="$2"
+                        shift 2
+                        ;;
+                    --graph|-g)
+                        graph="$2"
+                        shift 2
+                        ;;
+                    --mcp)
+                        use_mcp=1
+                        shift
+                        ;;
+                    *)
+                        echo "Unknown option: $1"
+                        display_usage
+                        exit 1
+                        ;;
+                esac
+            done
+            
+            # Check required options
+            if [ -z "$dir" ]; then
+                echo "Error: No directory specified"
+                display_usage
+                exit 1
+            fi
+            
+            # Set default pattern
+            if [ -z "$pattern" ]; then
+                pattern="*"
+            fi
+            
+            # Convert to MCP if requested
+            if [ -n "$use_mcp" ]; then
+                mcp_command=$(convert_to_mcp "scan-enhanced" "$dir" "$pattern" "$output" "$json" "$graph")
+                echo "$mcp_command"
+                "${SCRIPT_DIR}/mcp_yaml_catalogger_enhanced.sh" "$mcp_command"
+            else
+                # Run the enhanced scanner directly
+                python3 "${SCRIPT_DIR}/yaml_tree_catalogger_enhanced.py" "$dir" \
+                    --pattern "$pattern" \
+                    ${output:+--output "$output"} \
+                    ${json:+--output "$json"} \
+                    ${graph:+--graph "$graph"}
+            fi
+            ;;
+            
+        query)
+            # Forward all arguments to the query engine
+            run_query_engine "$@"
+            ;;
+            
+        visualize)
+            # Parse options
+            while [ $# -gt 0 ]; do
+                case "$1" in
+                    --graph|-g)
+                        graph="$2"
+                        shift 2
+                        ;;
+                    *)
+                        echo "Unknown option: $1"
+                        display_usage
+                        exit 1
+                        ;;
+                esac
+            done
+            
+            # Run the visualizer
+            run_visualizer "$graph"
+            ;;
+            
+        mcp)
+            # Run with MCP input
+            if [ $# -eq 0 ]; then
+                echo "Error: No MCP command specified"
+                display_usage
+                exit 1
+            fi
+            
+            mcp_command="$1"
+            
+            # Check if the command contains yaml_catalog or yaml_catalog_enhanced
+            if [[ "$mcp_command" =~ yaml_catalog_enhanced ]]; then
+                "${SCRIPT_DIR}/mcp_yaml_catalogger_enhanced.sh" "$mcp_command"
+            else
+                "${SCRIPT_DIR}/mcp_yaml_catalogger.sh" "$mcp_command"
+            fi
+            ;;
+            
+        help)
+            display_usage
+            ;;
+            
+        *)
+            echo "Unknown command: $command"
+            display_usage
+            exit 1
+            ;;
+    esac
+}
+
+# Run the main function
+main "$@"
