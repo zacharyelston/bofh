@@ -164,33 +164,7 @@ basic_command_examples:
       actual_script: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur)"
 
 available_mcp_tools:
-  filesystem_management:
-    - name: "bofh.filesystem.analyze"
-      description: "Analyze directory structure"
-      implementation: "bofh/tools/vectorizer/analyze-directory.sh"
-    - name: "bofh.filesystem.archive"
-      description: "Create archive of files"
-      implementation: "bofh/tools/find2tar/mcp_batch_processor.sh"
-    - name: "bofh.filesystem.find"
-      description: "Find files by pattern"
-      implementation: "bofh/tools/find2tar/mcp_directory_scanner.sh"
-    - name: "bofh.filesystem.schema"
-      description: "Search for schema patterns"
-      implementation: "bofh/tools/schema_search/find_schemas.sh"
-  docker_management:
-    - name: "bofh.docker.build"
-      description: "Build Docker images"
-      implementation: "docker-compose build"
-    - name: "bofh.docker.run"
-      description: "Run Docker containers"
-      implementation: "docker-compose up"
-    - name: "bofh.docker.analyze"
-      description: "Run analysis containers"
-      implementation: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur)"
-    - name: "bofh.docker.visualize"
-      description: "Run visualization containers"
-      implementation: "bofh/tools/vectorizer/docker-compose.yml (service: diskvoyeur-viz)"
-  system_tools:
+    system_tools:
     - name: "execute_command"
       description: "Execute a whitelisted shell command"
     - name: "get_whitelist"
