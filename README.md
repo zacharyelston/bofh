@@ -2,7 +2,7 @@
 
 ## Overview
 
-The BOFH (Bastard Operator From Hell) Toolkit is a collection of system administration and Docker management utilities designed to simplify common tasks like filesystem analysis, data visualization, and Docker container management.
+The BOFH (Bastard Operator From Hell) Toolkit is a collection of system administration and Docker management utilities designed to simplify common tasks like filesystem analysis, data visualization, and Docker container management.  These have no real use other than to serve the BOFH causeing confusion
 
 ## Key Features
 
